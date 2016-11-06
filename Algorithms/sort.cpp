@@ -5,9 +5,20 @@
 
 vector<int> sort(BinaryHeap* heap)
 {
-	//while there are still element in heap
-		//add heap.ExtractMin() to result
+	vector<int> result;
+	
+	while(!(heap->IsEmpty()))
+		result.push_back(heap->ExtractMin());
 
-	//return result
+	return result;
 }
 
+vector<int> sort(vEB* vebTree)
+{
+	vector<int> result;
+
+	while(!(vebTree->IsEmpty()))
+		result.push_back(vebTree->ExtractMin());
+
+	return result;
+}
