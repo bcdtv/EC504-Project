@@ -23,4 +23,13 @@ void BinaryHeap::Delete(int value)
 
 // extract the minimum element
 int BinaryHeap::ExtractMin(int value)
+
+// get if the heap is empty
+bool BinaryHeap::IsEmpty()
+
+// get the next number greater than value
+int BinaryHeap::Successor(int value)
+
+// get the next number less than value
+int BinaryHeap::Predecessor(int value)
 ```
