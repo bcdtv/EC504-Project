@@ -33,7 +33,7 @@ vEB::vEB()
 // param value: number to insert
 void vEB::Insert(int value)
 ```
-## Running Tests
+### Running Tests
 make test-heap
  - test validity of binary heap construction
  - asks for inputs N, INT_MIN, and INT_MAX
