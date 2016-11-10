@@ -1,4 +1,3 @@
-#include <limits.h>
 #include <vector>
 #include "BinaryHeap.h"
 
@@ -43,8 +42,7 @@ int BinaryHeap::extract(){
   return root;
 }
 
-// Simply returns whether or not the heap
-// is empty.
+// Returns whether or not the heap is empty.
 bool BinaryHeap::isEmpty(){
   return nodes.size() == 0;
 }
