@@ -12,7 +12,7 @@ void BinaryHeap::insert(int value)
 void BinaryHeap::remove(int value)
 
 // extract the minimum element
-int BinaryHeap::extract(int value)
+int BinaryHeap::extract()
 
 // get if the heap is empty
 bool BinaryHeap::isEmpty()
