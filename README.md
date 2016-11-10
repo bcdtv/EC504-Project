@@ -23,3 +23,13 @@ int BinaryHeap::successor(int value)
 // get the next number less than value
 int BinaryHeap::predecessor(int value)
 ```
+
+### vEB Tree
+```c++
+// default constructor
+vEB::vEB()
+
+// insert a number into vEB
+// param value: number to insert
+void vEB::Insert(int value)
+```
