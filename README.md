@@ -36,7 +36,9 @@ void vEB::Insert(int value)
 ### Running Tests
 make test-heap
  - test validity of binary heap construction
+ - test extract method
  - asks for inputs N, INT_MIN, and INT_MAX
+ - prints results to stdout
 
 make test-sort
  - benchmark data structures with sorting algorithm
