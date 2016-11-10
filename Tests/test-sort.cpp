@@ -2,6 +2,7 @@
 #include <ctime>
 #include <iostream>
 #include <vector>
+#include "../Algorithms/sort.h"
 #include "../DataStructures/BinaryHeap.h"
 //#include "../DataStructures/VEB.h"
 
@@ -41,7 +42,7 @@ int main(){
   // benchmark sorting with the binary heap
   int start_time = std::clock();
   BinaryHeap heap = BinaryHeap(numbers);
-  //int sorted_numbers = sort(heap);
+  std::vector<int> sorted_numbers = sort(&heap);
   int stop_time = std::clock();
   double elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
   std::cout << "Sorting time with the Binary Heap: " << elapsed_time << "ms" << std::endl;
@@ -49,7 +50,7 @@ int main(){
   // benchmark sorting with the vEB tree
   start_time = std::clock();
   //VEB vEB = VEB(numbers);
-  //int sorted_numbers = sort(vEB);
+  //int sorted_numbers = sort(&vEB);
   stop_time = std::clock();
   elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
   std::cout << "Sorting time with the vEB Tree: " << elapsed_time << "ms" << std::endl;

@@ -5,8 +5,9 @@
 #include "../DataStructures/vEB.h"
 #include <vector>
 
-vector<int> sort(BinaryHeap* heap);
+std::vector<int> sort(BinaryHeap* heap);
 
-vector<int> sort(vEB* vebTree)
+// vEB not yet implemented
+//std::vector<int> sort(vEB* vebTree);
 
 #endif
