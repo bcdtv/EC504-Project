@@ -3,7 +3,6 @@
 #include <iostream>
 #include <vector>
 #include "../DataStructures/BinaryHeap.h"
-//#include "../DataStructures/VEB.h"
 
 void print_header();
 void print_footer();
@@ -38,32 +37,34 @@ int main(){
     numbers[i] = MIN_INT + (std::rand() % (MAX_INT-MIN_INT+1));
   }
 
-  // benchmark sorting with the binary heap
-  int start_time = std::clock();
-  BinaryHeap heap = BinaryHeap(numbers);
-  //int sorted_numbers = sort(heap);
-  int stop_time = std::clock();
-  double elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
-  std::cout << "Sorting time with the Binary Heap: " << elapsed_time << "ms" << std::endl;
+  // print input array
+  std::cout << "Input Array: " << std::endl;
+  for (int i=0; i<N; i++){
+    std::cout << numbers[i] << std::endl;
+  }
 
-  // benchmark sorting with the vEB tree
-  start_time = std::clock();
-  //VEB vEB = VEB(numbers);
-  //int sorted_numbers = sort(vEB);
-  stop_time = std::clock();
-  elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
-  std::cout << "Sorting time with the vEB Tree: " << elapsed_time << "ms" << std::endl;
+  // build the binary heap
+  BinaryHeap heap = BinaryHeap(numbers);
+
+  // print the binary heap
+  std::cout << "Binary Heap Nodes: " << std::endl;
+  std::vector<int> heap_nodes = heap.getNodes();
+  for (int i=0; i<N; i++){
+    std::cout << heap_nodes[i] << std::endl;
+  }
 
   print_footer();
   return 0;
 }
 
 void print_header(){
-  std::cout << "=============== SORTING BENCHMARK ===============" << std::endl;
+  std::cout << "=============== BINARY HEAP TESTS ===============" << std::endl;
 }
 
 void print_footer(){
   std::cout << "=================================================" << std::endl;
   std::cout << std::endl;
 }
+
+
 

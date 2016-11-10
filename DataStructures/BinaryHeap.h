@@ -2,49 +2,31 @@
 #define BINARY_HEAP_H
 
 #include <vector>
-
-/* 
-   The class creates nodes in dynamic memory using the new keyword.
-   Therefore, the class requires a destructor in order to clean up
-   the nodes with the delete keyword. Because the class requires 
-   a destructor, in order to follow the "C++ Rule of Three", the 
-   class also defines a copy constructor and a copy assignment
-   operator.
-*/
+ 
+// Because a binary heap is a complete binary tree, it 
+// can be represented using an array. In this case, we
+// use the std::vector container in order to allow for
+// dynamic size.
 
 class BinaryHeap{
-  // inner classes
-  private:
-    class Node{
-      // public fields
-      public:
-        int value;
-        Node* parent;
-        Node* left;
-        Node* right;
-      // public methods
-      public:
-        Node();
-        Node(int value);
-    };
-
   // public methods
   public:
-    BinaryHeap();
-    BinaryHeap(vector<int> numbers);
-    BinaryHeap(BinaryHeap& other);
-    ~BinaryHeap();
-    BinaryHeap& operator=(const BinaryHeap& other);
-    int extract();
+    BinaryHeap(std::vector<int> numbers);
     void insert(int value);
+    void remove(int value);
+    int extract();
+    bool isEmpty();
+    int successor(int value);
+    int predecessor(int value);
+    std::vector<int> getNodes();
 
   // private fields
   private:
-    Node* root;
+    std::vector<int> nodes;
 
   // private methods
   private:
-    void minHeapify(Node* node);
+    void minHeapify(int i);
 };
 
 #endif
