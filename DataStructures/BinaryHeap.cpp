@@ -3,9 +3,9 @@
 
 // ============ Public Method Implementations ============
 
-// This method builds a binary heap by treating
-// an input array as a complete binary tree and
-// calling minHeapify on each node.
+// This constructor builds a binary heap by 
+// treating an input array as a complete binary 
+// tree and calling minHeapify on each node.
 BinaryHeap::BinaryHeap(std::vector<int> numbers){
   nodes = numbers;
   for(int i=nodes.size()-1; i>=0; i--){
