@@ -1,7 +1,5 @@
 # EC504-Project
 
-## Data Structures
-
 ### BinaryHeap
 ```c++
 // construct a binary heap from an input array
