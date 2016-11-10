@@ -1,35 +1,27 @@
 # EC504-Project
 
+## Data Structures
+
+### BinaryHeap
 ```c++
-// vEB Constructor
-vEB::vEB()
-
-// insert a number into vEB
-// param value: number to insert
-void vEB::Insert(int value)
-
-
-
-// Binary Heap
-
-// create an empty BinaryHeap
-BinayHeap::BinaryHeap()
+// construct a binary heap from an input array
+void BinaryHeap::BinaryHeap(vector<int> numbers)
 
 // insert a number
-void BinaryHeap::Insert(int value)
+void BinaryHeap::insert(int value)
 
-// delete a number
-void BinaryHeap::Delete(int value)
+// remove a number
+void BinaryHeap::remove(int value)
 
 // extract the minimum element
-int BinaryHeap::ExtractMin(int value)
+int BinaryHeap::extract(int value)
 
 // get if the heap is empty
-bool BinaryHeap::IsEmpty()
+bool BinaryHeap::isEmpty()
 
 // get the next number greater than value
-int BinaryHeap::Successor(int value)
+int BinaryHeap::successor(int value)
 
 // get the next number less than value
-int BinaryHeap::Predecessor(int value)
+int BinaryHeap::predecessor(int value)
 ```
