@@ -1,7 +1,1 @@
 This folder contains source code for the tests.
-
-Benchmark data structures with sorting algorithm.
-- make test-sort
-
-Benchmark data structures with X algorithm.
-- make test-X
