@@ -26,7 +26,7 @@ class BinaryHeap{
 
   // private methods
   private:
-    void minHeapify(int i);
+    void minHeapify(int current_i);
 };
 
 #endif

@@ -53,6 +53,12 @@ int main(){
     std::cout << heap_nodes[i] << std::endl;
   }
 
+  // extract and print until heap is empty
+  std::cout << "Extract and print: " << std::endl;
+  while(!heap.isEmpty()){
+    std::cout << heap.extract() << std::endl;
+  }
+
   print_footer();
   return 0;
 }
