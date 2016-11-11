@@ -1,4 +1,5 @@
 #include <climits>
+#include <math.h>
 #include <vector>
 #include <iostream>
 #include "BinaryHeap.h"
@@ -29,29 +30,42 @@ BinaryHeap::BinaryHeap(std::vector<int> numbers){
   this-> min = this->nodes.at(0);
 }
 
-void BinaryHeap::insert(int value){
+void BinaryHeap::insert(int value) {
+  // place value into the end of the heap 
+  nodes.push_back(value);
 
+  // get current value and index and find the parent. 
+  int curr_value = value;
+  int curr_index = nodes.size()-1;
+  int parent = floor((curr_index - 1) / 2);
+  
+  // heapify upwards. 
+  while (parent>=0 && curr_value < nodes[parent]) {
+    // swap values around
+    int temp = nodes[parent];
+    nodes[parent] = curr_value;
+    nodes[curr_index] = temp; 
+
+    //update current index, value, and parent. 
+    curr_index = parent; 
+    curr_value = nodes[curr_index];
+    parent = floor((curr_index - 1) / 2);
+  };
+
+  this->updateMin();
 }
 
 void BinaryHeap::remove(int value){
   int index = this->getIndex(value);
-
+  cout << index << endl;
   this->nodes.at(index) = INT_MIN;
-  minHeapify(index);
+  minHeapify(0);
   this->extract();
-  // int root = nodes[0];
+  this->updateMin();
+}
 
-  // // make the last value the root
-  // nodes[0] = nodes[nodes.size()-1];
-
-  // // delete the obsolete last value
-  // nodes.pop_back();
-
-  // // heapify the new root
-  // minHeapify(0);
-
-  // // return the old root value
-  // return root;  
+void BinaryHeap::updateMin() {
+  this->min = this->nodes.at(0);
 }
 
 int BinaryHeap::getIndex(int value) {
@@ -87,6 +101,9 @@ int BinaryHeap::extract(){
 
   // heapify the new root
   minHeapify(0);
+
+  // update min
+  this->updateMin();
 
   // return the old root value
   return root;

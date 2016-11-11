@@ -16,7 +16,8 @@ class BinaryHeap{
     BinaryHeap(std::vector<int> numbers);
     void insert(int value); // Vera
     void remove(int value); // Dor
-    int getIndex(int value); 
+    int getIndex(int value);
+    void updateMin(); 
     int extract();  
     bool isEmpty();
     // int successor(int value); // Dor
