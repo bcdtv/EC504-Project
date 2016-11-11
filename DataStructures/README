@@ -1,3 +1,5 @@
 This folder contains source code for the data structure implementations.
 
 //additional comments below
+check for inserting the same value twice
+check for out of index NOT_FOUND potential errors

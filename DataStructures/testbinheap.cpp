@@ -35,5 +35,10 @@ int main(int argc, char const *argv[])
     b.display();
     cout << "The min is: " << b.min << endl;    
 
+
+    b.insert(20);
+    b.display();
+    cout << "The min is: " << b.min << endl;    
+
     return 0;
 }
