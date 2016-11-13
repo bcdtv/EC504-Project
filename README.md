@@ -1,9 +1,12 @@
 # EC504-Project
 
-### BinaryHeap
+### Binary Heap
 ```c++
+// create an empty binary heap
+BinaryHeap::BinaryHeap()
+
 // construct a binary heap from an input vector
-void BinaryHeap::BinaryHeap(std::vector<int> numbers)
+BinaryHeap::BinaryHeap(std::vector<int> numbers)
 
 // insert a number
 void BinaryHeap::insert(int value)
@@ -12,25 +15,25 @@ void BinaryHeap::insert(int value)
 void BinaryHeap::remove(int value)
 
 // extract the minimum element
-int BinaryHeap::extract()
+int BinaryHeap::extractMin()
 
 // get if the heap is empty
 bool BinaryHeap::isEmpty()
 
-// get the next number greater than value
-int BinaryHeap::successor(int value)
-
-// get the next number less than value
-int BinaryHeap::predecessor(int value)
-
 // get all the nodes in a vector
 std::vector<int> BinaryHeap::getNodes()
+
+// destructor
+BinaryHeap::~BinaryHeap()
 ```
 
 ### vEB Tree
 ```c++
-// // construct a vEB Tree from an input vector
-void vEB::vEB(std::vector<int> numbers)
+// create an empty vEB tree
+vEB::vEB()
+
+// construct a vEB Tree from an input vector
+vEB::vEB(std::vector<int> numbers)
 
 // insert a number
 void vEB::insert(int value)
@@ -39,9 +42,9 @@ void vEB::insert(int value)
 void vEB::remove(int value)
 
 // extract the minimum element
-int vEB::extract()
+int vEB::extractMin()
 
-// get if the heap is empty
+// get if the vEB Tree is empty
 bool vEB::isEmpty()
 
 // get the next number greater than value
@@ -52,7 +55,77 @@ int vEB::predecessor(int value)
 
 // get all the nodes in a vector
 std::vector<int> vEB::getNodes()
+
+// destructor
+vEB::~vEB()
 ```
+
+### Binary Search Tree
+```c++
+// create an empty Binary Search Tree
+BST::BST()
+
+// construct a BST from an input vector
+BST::BST(std::vector<int> numbers)
+
+// insert a number
+void BST::insert(int value)
+
+// remove a number
+void BST::remove(int value)
+
+// extract the minimum element
+int BST::extractMin()
+
+// get if the BST is empty
+bool BST::isEmpty()
+
+// get the next number greater than value
+int BST::successor(int value)
+
+// get the next number less than value
+int BST::predecessor(int value)
+
+// get all the nodes in a vector
+std::vector<int> BST::getNodes()
+
+// destructor
+BST::~BST()
+```
+
+### Deque
+```c++
+// create an empty deque
+Deque::Deque()
+
+// construct a Deque from an input vector
+Deque::Deque(std::vector<int> numbers)
+
+// insert a number
+void Deque::insert(int value)
+
+// remove a number
+void Deque::remove(int value)
+
+// extract the minimum element
+int Deque::extractMin()
+
+// get if the Deque is empty
+bool Deque::isEmpty()
+
+// get the next number greater than value
+int Deque::successor(int value)
+
+// get the next number less than value
+int Deque::predecessor(int value)
+
+// get all the nodes in a vector
+std::vector<int> Deque::getNodes()
+
+// destructor
+Deque::~Deque()
+```
+
 ### Running Tests
 make test-heap
  - test validity of binary heap construction
