@@ -4,6 +4,8 @@
 #include <vector>
 #include "../DataStructures/BinaryHeap.h"
 
+using namespace std;
+
 void print_header();
 void print_footer();
 
@@ -12,51 +14,51 @@ int main(){
 
   // request inputs
   int N;
-  std::cin >> N;
   int MIN_INT;
-  std::cin >> MIN_INT;
   int MAX_INT;
-  std::cin >> MAX_INT;
 
   // print inputs
-  std::cout << "N: " << N << std::endl;
-  std::cout << "MIN_INT: " << MIN_INT << std::endl;
-  std::cout << "MAX_INT: " << MAX_INT << std::endl;
+  cout << "N: ";
+  cin >> N;
+  cout << "MIN_INT: ";
+  cin >> MIN_INT;
+  cout << "MAX_INT: ";
+  cin >> MAX_INT;
 
   // validate inputs
   if (MIN_INT >= MAX_INT){
-    std::cout << "Error: MIN_INT is not less than MAX_INT" << std::endl;
+    cout << "Error: MIN_INT is not less than MAX_INT" << endl;
     print_footer();
     return 0;
   }
   
   // initialize input array
-  std::vector<int> numbers(N);
-  std::srand(std::time(NULL));
+  vector<int> numbers(N);
+  srand(time(NULL));
   for (int i=0; i<N; i++){
-    numbers[i] = MIN_INT + (std::rand() % (MAX_INT-MIN_INT+1));
+    numbers[i] = MIN_INT + (rand() % (MAX_INT-MIN_INT+1));
   }
 
   // print input array
-  std::cout << "Input Array: " << std::endl;
+  cout << "Input Array: " << endl;
   for (int i=0; i<N; i++){
-    std::cout << numbers[i] << std::endl;
+    cout << numbers[i] << endl;
   }
 
   // build the binary heap
   BinaryHeap heap = BinaryHeap(numbers);
 
   // print the binary heap
-  std::cout << "Binary Heap Nodes: " << std::endl;
-  std::vector<int> heap_nodes = heap.getNodes();
+  cout << "Binary Heap Nodes: " << endl;
+  vector<int> heap_nodes = heap.getNodes();
   for (int i=0; i<N; i++){
-    std::cout << heap_nodes[i] << std::endl;
+    cout << heap_nodes[i] << endl;
   }
 
   // extract and print until heap is empty
-  std::cout << "Extract and print: " << std::endl;
+  cout << "Extract and print: " << endl;
   while(!heap.isEmpty()){
-    std::cout << heap.extract() << std::endl;
+    cout << heap.extract() << endl;
   }
 
   print_footer();
@@ -64,12 +66,12 @@ int main(){
 }
 
 void print_header(){
-  std::cout << "=============== BINARY HEAP TESTS ===============" << std::endl;
+  cout << "=============== BINARY HEAP TESTS ===============" << endl;
 }
 
 void print_footer(){
-  std::cout << "=================================================" << std::endl;
-  std::cout << std::endl;
+  cout << "=================================================" << endl;
+  cout << endl;
 }
 
 

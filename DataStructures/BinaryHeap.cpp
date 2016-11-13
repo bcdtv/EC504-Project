@@ -11,23 +11,23 @@ using namespace std;
 // ============ Public Method Implementations ============
 
 BinaryHeap::BinaryHeap() {
-  cout << "hello" << endl;
+  cout << "Creating a default empty Binary Heap" << endl;
 }
 
 BinaryHeap::~BinaryHeap() {
-  cout << "bye" << endl;
+  cout << "Deleting the Binary Heap" << endl;
 }
 // This constructor builds a binary heap by 
 // treating an input array as a complete binary 
 // tree and calling minHeapify on each node.
-BinaryHeap::BinaryHeap(std::vector<int> numbers){
-  cout << "hello" << endl;
+BinaryHeap::BinaryHeap(vector<int> numbers){
+  cout << "Creating a Binary Heap initalized with an array of length: ";
+  cout << numbers.size() << endl;
   this->nodes = numbers;
   for(int i=nodes.size()-1; i>=0; i--){
     minHeapify(i);
   }
-  this->size = numbers.size();
-  this-> min = this->nodes.at(0);
+  
 }
 
 void BinaryHeap::insert(int value) {
@@ -51,8 +51,6 @@ void BinaryHeap::insert(int value) {
     curr_value = nodes[curr_index];
     parent = floor((curr_index - 1) / 2);
   };
-
-  this->updateMin();
 }
 
 void BinaryHeap::remove(int value){
@@ -61,15 +59,11 @@ void BinaryHeap::remove(int value){
   this->nodes.at(index) = INT_MIN;
   minHeapify(0);
   this->extract();
-  this->updateMin();
 }
 
-void BinaryHeap::updateMin() {
-  this->min = this->nodes.at(0);
-}
 
 int BinaryHeap::getIndex(int value) {
-  for (int i=0; i < this->nodes.size(); i++) {
+  for (int i=0; i < nodes.size(); i++) {
       if (this->nodes.at(i) == value) {
         return i;
       } 
@@ -78,10 +72,10 @@ int BinaryHeap::getIndex(int value) {
 }
 
 void BinaryHeap::display() {
-
-    for(int i=0;i<this->getNodes().size();i++) {
-
-      cout << this->nodes[i] << " ";
+  cout << nodes.size() << endl;
+    for(int i = 0; i < nodes.size(); i++) {
+      cout << "anything " << i << endl;
+      cout << nodes.at(i) << " ";
     }
     cout << endl;
 }
@@ -102,42 +96,19 @@ int BinaryHeap::extract(){
   // heapify the new root
   minHeapify(0);
 
-  // update min
-  this->updateMin();
-
   // return the old root value
   return root;
 }
 
 // Returns whether or not the heap is empty.
-bool BinaryHeap::isEmpty(){
+bool BinaryHeap::isEmpty() {
   return nodes.size() == 0;
 }
 
-// int BinaryHeap::successor(int value){
-//   int current_num = this->min;
-//   int left_i = 1;
-//   while(current_num < value && left_i < this->size) {
-//     if(this->nodes.at(left_i) < )
-//     int left_i = current_i*2+1;
-//     current_num
-//   }
-
-
-
-// }
-
-// int BinaryHeap::predecessor(int value){
-//   if (value <= this->min) {
-//     return  NOT_FOUND;
-//   }
-//   return 3;
-
-// }
 
 // This method is used to access the heap
 // nodes for testing purposes.
-std::vector<int> BinaryHeap::getNodes(){
+vector<int> BinaryHeap::getNodes(){
   return nodes;
 }
 // =======================================================
@@ -153,12 +124,16 @@ void BinaryHeap::minHeapify(int current_i){
 
   // find the index for the smallest value
   int smallest_i = current_i;
-  if ((left_i < size) && (nodes[left_i] < nodes[smallest_i])){
-    smallest_i = left_i;
+  if (left_i < size) {
+    if (nodes[left_i] < nodes[smallest_i]){
+      smallest_i = left_i;
+    } 
   }
-  if ((right_i < size) && (nodes[right_i] < nodes[smallest_i])){
-    smallest_i = right_i;
-  }
+  if (right_i < size) {
+    if(nodes[right_i] < nodes[smallest_i]) {
+      smallest_i = right_i;
+    }
+  } 
 
   // swap and call recursively if necessary
   if (smallest_i != current_i){

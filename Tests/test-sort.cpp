@@ -5,6 +5,7 @@
 #include "../Algorithms/sort.h"
 #include "../DataStructures/BinaryHeap.h"
 //#include "../DataStructures/VEB.h"
+using namespace std;
 
 void print_header();
 void print_footer();
@@ -14,57 +15,59 @@ int main(){
 
   // request inputs
   int N;
-  std::cin >> N;
   int MIN_INT;
-  std::cin >> MIN_INT;
   int MAX_INT;
-  std::cin >> MAX_INT;
+  
 
-  // print inputs
-  std::cout << "N: " << N << std::endl;
-  std::cout << "MIN_INT: " << MIN_INT << std::endl;
-  std::cout << "MAX_INT: " << MAX_INT << std::endl;
+  cout << "N: ";
+  cin >> N;
+  cout << "MIN_INT: ";
+  cin >> MIN_INT;
+  cout << "MAX_INT: ";
+  cin >> MAX_INT;
 
   // validate inputs
   if (MIN_INT >= MAX_INT){
-    std::cout << "Error: MIN_INT is not less than MAX_INT" << std::endl;
+    cout << "Error: MIN_INT is not less than MAX_INT" << endl;
     print_footer();
     return 0;
   }
   
   // initialize input array
-  std::vector<int> numbers(N);
-  std::srand(std::time(NULL));
+  vector<int> numbers(N);
+  srand(time(NULL));
+  cout << "Test data contains: ";
   for (int i=0; i<N; i++){
-    numbers[i] = MIN_INT + (std::rand() % (MAX_INT-MIN_INT+1));
+    numbers[i] = MIN_INT + (rand() % (MAX_INT-MIN_INT+1));
+    cout << numbers[i] << " ";
   }
-
+  cout << endl;
   // benchmark sorting with the binary heap
-  int start_time = std::clock();
-  BinaryHeap heap = BinaryHeap(numbers);
-  std::vector<int> sorted_numbers = sort(&heap);
-  int stop_time = std::clock();
+  int start_time = clock();
+  BinaryHeap * heap = new BinaryHeap(numbers);
+  vector<int> sorted_numbers = sort(heap);
+  int stop_time = clock();
   double elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
-  std::cout << "Sorting time with the Binary Heap: " << elapsed_time << "ms" << std::endl;
+  cout << "Sorting time with the Binary Heap: " << elapsed_time << "ms" << endl;
 
   // benchmark sorting with the vEB tree
-  start_time = std::clock();
+  start_time = clock();
   //VEB vEB = VEB(numbers);
   //int sorted_numbers = sort(&vEB);
-  stop_time = std::clock();
+  stop_time = clock();
   elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
-  std::cout << "Sorting time with the vEB Tree: " << elapsed_time << "ms" << std::endl;
-
+  cout << "Sorting time with the vEB Tree: " << elapsed_time << "ms" << endl;
+  delete heap;
   print_footer();
   return 0;
 }
 
 void print_header(){
-  std::cout << "=============== SORTING BENCHMARK ===============" << std::endl;
+  cout << "=============== SORTING BENCHMARK ===============" << endl;
 }
 
 void print_footer(){
-  std::cout << "=================================================" << std::endl;
-  std::cout << std::endl;
+  cout << "=================================================" << endl;
+  cout << endl;
 }
 

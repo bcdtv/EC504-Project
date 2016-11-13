@@ -3,9 +3,11 @@
 #include "../DataStructures/vEB.h"
 #include <vector>
 
-std::vector<int> sort(BinaryHeap* heap)
+using namespace std;
+
+vector<int> sort(BinaryHeap* heap)
 {
-	std::vector<int> result;
+	vector<int> result;
 	
 	while(!(heap->isEmpty()))
 		result.push_back(heap->extract());
@@ -14,9 +16,9 @@ std::vector<int> sort(BinaryHeap* heap)
 }
 
 // vEB not yet implemented
-/*std::vector<int> sort(vEB* vebTree)
+/*vector<int> sort(vEB* vebTree)
 {
-	std::vector<int> result;
+	vector<int> result;
 
 	while(!(vebTree->IsEmpty()))
 		result.push_back(vebTree->ExtractMin());
