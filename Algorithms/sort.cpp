@@ -1,3 +1,4 @@
+#include <iostream>
 #include "sort.h"
 #include "../DataStructures/BinaryHeap.h"
 #include "../DataStructures/vEB.h"
@@ -13,6 +14,14 @@ vector<int> sort(BinaryHeap* heap)
 		result.push_back(heap->extract());
 
 	return result;
+}
+
+void display(vector<int> sorted_array) {
+    cout << "Sorted array contains: ";
+    for(int i = 0; i < sorted_array.size(); i++) {
+        cout << sorted_array.at(i) << " ";
+    }
+    cout << endl;
 }
 
 // vEB not yet implemented

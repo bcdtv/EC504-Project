@@ -48,6 +48,7 @@ int main(){
   vector<int> sorted_numbers = sort(heap);
   int stop_time = clock();
   double elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
+  display(sorted_numbers);
   cout << "Sorting time with the Binary Heap: " << elapsed_time << "ms" << endl;
 
   // benchmark sorting with the vEB tree

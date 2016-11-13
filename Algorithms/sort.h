@@ -5,7 +5,11 @@
 #include "../DataStructures/vEB.h"
 #include <vector>
 
-std::vector<int> sort(BinaryHeap* heap);
+using namespace std;
+
+vector<int> sort(BinaryHeap* heap);
+void display(vector<int>);
+
 
 // vEB not yet implemented
 //std::vector<int> sort(vEB* vebTree);

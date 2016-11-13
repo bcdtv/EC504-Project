@@ -72,9 +72,7 @@ int BinaryHeap::getIndex(int value) {
 }
 
 void BinaryHeap::display() {
-  cout << nodes.size() << endl;
     for(int i = 0; i < nodes.size(); i++) {
-      cout << "anything " << i << endl;
       cout << nodes.at(i) << " ";
     }
     cout << endl;
