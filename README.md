@@ -3,6 +3,10 @@
 ## Code Style
 Having some consistancy within the code makes modifying and reading code soo much easier so some guidelines have been listed below. Feel free to code however you like but don't be surprised if modifications are made afterwards in order to comply to guidelines below.  
 
+**Indentations**
+two spaces  
+_reasoning:_ Two because keeping code width small makes it more readable. Spaces because tabs are platform dependent and also wider.
+
 **Names**  
 classes: CapitalizedCamelCase  
 variables: underscore_case  
