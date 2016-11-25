@@ -1,37 +1,46 @@
-#include <iostream>
+#include <climits>
+#include <vector>
 #include "sort.h"
 #include "../DataStructures/BinaryHeap.h"
-#include "../DataStructures/vEB.h"
-#include <vector>
+#include "../DataStructures/VEB.h"
 
 using namespace std;
 
-vector<int> sort(BinaryHeap* heap)
-{
-	vector<int> result;
-	
-	while(!(heap->isEmpty()))
-		result.push_back(heap->extract());
-
-	return result;
+// To return a sorted list of numbers that
+// are stored in a binary heap, simply call
+// extract min until the heap is empty.
+vector<int> sort(BinaryHeap* heap){
+  vector<int> result(heap->size());
+  while(!(heap->empty())){
+    result.push_back(heap->extract_min());
+  }
+  return result;
 }
 
-void display(vector<int> sorted_array) {
-    cout << "Sorted array contains: ";
-    for(int i = 0; i < sorted_array.size(); i++) {
-        cout << sorted_array.at(i) << " ";
+// There are two possible ways to return a
+// sorted list of numbers from a vEB tree.
+// One way is to get the min and then call 
+// remove(min) until the tree is empty.
+// Another way is to continously call
+// successor. Both will be tested for
+// performance.
+vector<int> sort(VEB* vEB, int method){
+  vector<int> result(vEB->size());
+
+  if (method == 1){
+    while(!(vEB->empty())){
+      result.push_back(vEB->min);
+      vEB->remove(vEB->min);
     }
-    cout << endl;
+  }
+
+  if (method == 2){
+    int value = INT_MIN;
+    for (int i=0; i<vEB->size(); i++){
+      value = vEB->successor(value);
+      result.push_back(value);
+    }
+  }
+
+  return result;
 }
-
-// vEB not yet implemented
-/*vector<int> sort(vEB* vebTree)
-{
-	vector<int> result;
-
-	while(!(vebTree->IsEmpty()))
-		result.push_back(vebTree->ExtractMin());
-
-	return result;
-}
-*/

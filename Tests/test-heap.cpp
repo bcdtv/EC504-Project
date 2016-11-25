@@ -1,77 +1,105 @@
-#include <cstdlib>
-#include <ctime>
 #include <iostream>
 #include <vector>
+#include "utils.h"
 #include "../DataStructures/BinaryHeap.h"
 
 using namespace std;
 
-void print_header();
-void print_footer();
+void validate(BinaryHeap heap);
+BinaryHeap test_constructor(vector<int> numbers);
+void test_insert(vector<int> numbers);
+void test_remove(BinaryHeap heap, vector<int> numbers);
+void test_extract_min(BinaryHeap heap);
 
 int main(){
-  print_header();
+  print_header("BINARY HEAP TESTS");
 
-  // request inputs
-  int N;
-  int MIN_INT;
-  int MAX_INT;
-
-  // print inputs
-  cout << "N: ";
-  cin >> N;
-  cout << "MIN_INT: ";
-  cin >> MIN_INT;
-  cout << "MAX_INT: ";
-  cin >> MAX_INT;
-
-  // validate inputs
-  if (MIN_INT >= MAX_INT){
-    cout << "Error: MIN_INT is not less than MAX_INT" << endl;
+  // generate a sample vector of numbers for testing
+  vector<int> numbers = generate_numbers();
+  if (numbers.empty()){
     print_footer();
     return 0;
   }
-  
-  // initialize input array
-  vector<int> numbers(N);
-  srand(time(NULL));
-  for (int i=0; i<N; i++){
-    numbers[i] = MIN_INT + (rand() % (MAX_INT-MIN_INT+1));
-  }
 
-  // print input array
-  cout << "Input Array: " << endl;
-  for (int i=0; i<N; i++){
-    cout << numbers[i] << endl;
-  }
-
-  // build the binary heap
-  BinaryHeap heap = BinaryHeap(numbers);
-
-  // print the binary heap
-  cout << "Binary Heap Nodes: " << endl;
-  vector<int> heap_nodes = heap.getNodes();
-  for (int i=0; i<N; i++){
-    cout << heap_nodes[i] << endl;
-  }
-
-  // extract and print until heap is empty
-  cout << "Extract and print: " << endl;
-  while(!heap.isEmpty()){
-    cout << heap.extract() << endl;
-  }
+  // test the binary heap methods
+  BinaryHeap heap = test_constructor(numbers);
+  test_insert(numbers);
+  test_remove(heap, numbers);
+  test_extract_min(heap);
 
   print_footer();
   return 0;
 }
 
-void print_header(){
-  cout << "=============== BINARY HEAP TESTS ===============" << endl;
+void validate(BinaryHeap heap){
+  bool valid = heap.valid();
+  if (valid){
+    cout << "VALID ";
+  }
+  else{
+    cout << "INVALID ";
+  }
 }
 
-void print_footer(){
-  cout << "=================================================" << endl;
-  cout << endl;
+BinaryHeap test_constructor(vector<int> numbers){
+  cout << endl << "BUILD HEAP USING VECTOR" << endl;
+
+  // build a binary heap directly with the passed numbers
+  BinaryHeap heap = BinaryHeap(numbers);
+
+  // check validity and display the heap
+  validate(heap);
+  heap.display();
+
+  return heap;
+}
+
+void test_insert(vector<int> numbers){
+  cout << endl << "INSERT" << endl;
+
+  // declare empty heap
+  BinaryHeap heap;
+
+  // check validity and display the initial heap
+  validate(heap); 
+  heap.display();
+
+  // insert, check validity, and display
+  for (int i=0; i<numbers.size(); i++){
+    heap.insert(numbers[i]);
+    validate(heap);
+    heap.display();
+  }
+}
+
+void test_remove(BinaryHeap heap, vector<int> numbers){
+  cout << endl << "REMOVE" << endl;
+
+  // check validity and display the initial heap
+  validate(heap);
+  heap.display();
+
+  // remove, check validity, and display
+  for (int i=0; i<numbers.size(); i++){
+    cout << "Removing " << numbers[i] << ":" << endl;
+    heap.remove(numbers[i]);
+    validate(heap);
+    heap.display();
+  }
+}
+
+void test_extract_min(BinaryHeap heap){
+  cout << endl << "EXTRACT MIN" << endl; 
+
+  // check validity and display the initial heap
+  heap.display();
+
+  // extract, check validity, and display
+  while(!heap.empty()){
+    heap.extract_min();
+    validate(heap);
+    heap.display();
+  }
 }
 
 
