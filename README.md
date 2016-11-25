@@ -4,7 +4,7 @@
 **Names**
 - classes: CapitalizedCamelCase
 - variables: underscore_case
-- methods: underscore_case
+- methods: underscore_case  
 _reasoning:_ The C++ standard library uses underscore case so we should as well to give the code a consistant look. However, our custom classes are special so those breaking C++ convention make them easier to spot.
 
 ### Binary Heap
