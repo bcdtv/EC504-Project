@@ -3,7 +3,7 @@
 ## Code Style
 Having some consistancy within the code makes modifying and reading code soo much easier so some guidelines have been listed below. Feel free to code however you like but don't be surprised if modifications are made afterwards in order to comply to guidelines below.  
 
-**Names**
+**Names**  
 classes: CapitalizedCamelCase  
 variables: underscore_case  
 methods: underscore_case  
@@ -15,6 +15,21 @@ int example_method(){
 }
 _reasoning:_ Simply preference. Most, if not all, have been changed to this style.
 
+---
+
+## Running Tests
+make test-heap
+ - test validity of binary heap construction
+ - test extract method
+ - asks for inputs N, INT_MIN, and INT_MAX
+ - prints results to stdout
+
+make test-sort
+ - benchmark data structures with sorting algorithm
+ - asks for inputs N, INT_MIN, and INT_MAX
+ - stores results in Tests/results folder
+
+---
  
 ## Data Structure API's
 ### Binary Heap
@@ -142,18 +157,9 @@ std::vector<int> Deque::getNodes()
 // destructor
 Deque::~Deque()
 ```
+---
 
-### Running Tests
-make test-heap
- - test validity of binary heap construction
- - test extract method
- - asks for inputs N, INT_MIN, and INT_MAX
- - prints results to stdout
 
-make test-sort
- - benchmark data structures with sorting algorithm
- - asks for inputs N, INT_MIN, and INT_MAX
- - stores results in Tests/results folder
 
 
 
