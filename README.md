@@ -3,7 +3,7 @@
 ## Code Style
 Having some consistancy within the code makes modifying and reading code soo much easier so some guidelines have been listed below. Feel free to code however you like but don't be surprised if modifications are made afterwards in order to comply to guidelines below.  
 
-**Indentations**
+**Indentations**  
 two spaces  
 _reasoning:_ Two because keeping code width small makes it more readable. Spaces because tabs are platform dependent and also wider.
 
@@ -24,15 +24,18 @@ _reasoning:_ Simply preference. Most, if not all, have been changed to this styl
 ---
 
 ## Running Tests
-make test-heap
- - test validity of binary heap construction
- - test extract method
+**Binary Heap**  
+command: make test-heap  
  - asks for inputs N, INT_MIN, and INT_MAX
+ - tests binary heap methods for correctness
+ - each method is tested seperately
  - prints results to stdout
 
-make test-sort
- - benchmark data structures with sorting algorithm
+**Sorting Benchmarks**
+command: make test-sort  
  - asks for inputs N, INT_MIN, and INT_MAX
+ - times how long it takes to sort an array of numbers
+ - repeated for each data structure
  - stores results in Tests/results folder
 
 ---
