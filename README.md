@@ -1,12 +1,22 @@
 # EC504-Project
 
-### Code Style
+## Code Style
+Having some consistancy within the code makes modifying and reading code soo much easier so some guidelines have been listed below. Feel free to code however you like but don't be surprised if modifications are made afterwards in order to comply to guidelines below.  
+
 **Names**
-- classes: CapitalizedCamelCase
-- variables: underscore_case
-- methods: underscore_case  
+classes: CapitalizedCamelCase  
+variables: underscore_case  
+methods: underscore_case  
 _reasoning:_ The C++ standard library uses underscore case so we should as well to give the code a consistant look. However, our custom classes are special so those breaking C++ convention make them easier to spot.
 
+**Curly Braces**
+int example_method(){
+  return 0; 
+}
+_reasoning:_ Simply preference. Most, if not all, have been changed to this style.
+
+ 
+## Data Structure API's
 ### Binary Heap
 ```c++
 // create an empty binary heap
