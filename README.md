@@ -11,7 +11,7 @@ _reasoning:_ Two, because keeping code width small makes it more readable. Space
 classes: CapitalizedCamelCase  
 variables: underscore_case  
 methods: underscore_case  
-_reasoning:_ The C++ standard library uses underscore case so we should as well in order to give the code a consistent look. However, our custom classes are special so those breaking C++ convention make them easier to spot.
+_reasoning:_ The C++ standard library uses underscore case so we should as well in order to give the code a consistent look. However, our custom classes are special, so those breaking C++ convention make them easier to spot.
 
 **Curly Braces**
 ```c++
@@ -73,6 +73,9 @@ bool valid();
 
 ### vEB Tree
 ```c++
+// public field representing the minimum value in the vEB tree
+int min
+
 // construct an empty vEB tree
 VEB();
 
