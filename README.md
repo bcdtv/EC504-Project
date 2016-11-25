@@ -74,7 +74,7 @@ bool valid();
 ### vEB Tree
 ```c++
 // public field representing the minimum value in the vEB tree
-int min
+int min;
 
 // construct an empty vEB tree
 VEB();
