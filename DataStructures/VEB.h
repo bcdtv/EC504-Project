@@ -1,15 +1,13 @@
 #ifndef V_EB_H
 #define V_EB_H
 
+#include <cmath>
+#include <map>
 #include <vector>
 
 using namespace std;
 
 class VEB{
-  // public fields
-  public:
-    int min;
-
   // public methods
   public:
     VEB();
@@ -18,15 +16,25 @@ class VEB{
     int predecessor(int value);
     void insert(int value);
     void remove(int value);
-    int max();
     bool empty();
     int size();
+    void display();
 
   // private fields
   private:
+    int min;
+    int max;
+    bool is_empty;
+    int size;
     vector<int> summary;
-    vector<VEB> clusters;
-    vector<int> raw_data;
+    map<int, VEB> clusters;
+
+  // private methods
+  private:
+    int low(int value);
+    int high(int value);
+    void insert_helper(VEB* vEB, int value);
+    void display_helper(VEB* vEB);
 };
 
 #endif

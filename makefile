@@ -5,6 +5,10 @@ test-sort:	Algorithms/sort.cpp DataStructures/BinaryHeap.cpp DataStructures/VEB.
 test-heap:	DataStructures/BinaryHeap.cpp Tests/test-heap.cpp
 		g++ -o test-heap DataStructures/BinaryHeap.cpp Tests/test-heap.cpp 
 
+test-veb:	DataStructures/VEB.cpp Tests/test-veb.cpp
+		g++ -o test-veb DataStructures/VEB.cpp Tests/test-veb.cpp
+
 clean:
 	rm -f test-sort
 	rm -f test-heap
+	rm -f test-veb
