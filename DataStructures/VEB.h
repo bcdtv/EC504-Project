@@ -1,7 +1,6 @@
 #ifndef V_EB_H
 #define V_EB_H
 
-#include <cmath>
 #include <map>
 #include <vector>
 
@@ -16,23 +15,22 @@ class VEB{
     int predecessor(int value);
     void insert(int value);
     void remove(int value);
+    int min();
+    int max();
     bool empty();
-    int size();
     void display();
 
   // private fields
   private:
-    int min;
-    int max;
+    int min_value;
+    int max_value;
     bool is_empty;
-    int size;
     vector<int> summary;
     map<int, VEB> clusters;
 
   // private methods
   private:
-    int low(int value);
-    int high(int value);
+    int get_cluster(int value);
     void insert_helper(VEB* vEB, int value);
     void display_helper(VEB* vEB);
 };

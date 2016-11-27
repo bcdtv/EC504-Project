@@ -28,7 +28,7 @@ class BinaryHeap{
 
   // private methods
   private:
-    void min_heapify(int current_i);
+    void heapify_down(int current_i);
     void heapify_up(int current_i);
     int get_index(int value); 
     bool valid_subheap(int current_i);

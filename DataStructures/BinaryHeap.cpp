@@ -15,11 +15,11 @@ BinaryHeap::BinaryHeap(){
 
 // This constructor builds a binary heap by 
 // treating an input array as a complete binary 
-// tree and calling min heapify on each node.
+// tree and calling heapify down on each node.
 BinaryHeap::BinaryHeap(vector<int> numbers){
   this->nodes = numbers;
   for(int i=nodes.size()-1; i>=0; i--){
-    min_heapify(i);
+    heapify_down(i);
   }
 }
 
@@ -59,8 +59,8 @@ void BinaryHeap::remove(int value){
 
 // Returns and removes the current value at the root
 // of the heap. To maintain the min heap property, 
-// the last value becomes the new root and min heapify 
-// is called on it.
+// the last value becomes the new root and heapify 
+// down is called on it.
 int BinaryHeap::extract_min(){
   // get the root value
   int root = nodes[0];
@@ -72,7 +72,7 @@ int BinaryHeap::extract_min(){
   nodes.pop_back();
 
   // heapify the new root
-  min_heapify(0);
+  heapify_down(0);
 
   // return the old root value
   return root;
@@ -106,7 +106,7 @@ bool BinaryHeap::valid(){
 // =======================================================
 
 // ============ Private Method Implementations ===========
-void BinaryHeap::min_heapify(int current_i){
+void BinaryHeap::heapify_down(int current_i){
   // get the size of the heap
   int size = nodes.size();
 
@@ -132,7 +132,7 @@ void BinaryHeap::min_heapify(int current_i){
     int temp = nodes[current_i];
     nodes[current_i] = nodes[smallest_i];
     nodes[smallest_i] = temp;
-    min_heapify(smallest_i);
+    heapify_down(smallest_i);
   }
 }
 

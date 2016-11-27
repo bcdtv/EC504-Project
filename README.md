@@ -73,9 +73,6 @@ bool valid();
 
 ### vEB Tree
 ```c++
-// public field representing the minimum value in the vEB tree
-int min;
-
 // construct an empty vEB tree
 VEB();
 
@@ -94,14 +91,17 @@ void insert(int value);
 // remove a number
 void remove(int value);
 
+// get the min value within the vEB tree
+int min();
+
 // get the max value within the vEB tree
 int max();
 
 // returns true if the vEB tree is empty
 bool empty();
 
-// returns the size of the vEB tree
-int size();
+// prints the vEB tree values to stdout
+void display();
 ```
 
 ### Binary Search Tree
