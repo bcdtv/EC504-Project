@@ -5,8 +5,9 @@
 
 using namespace std;
 
-VEB test_empty_constructor();
-void test_insert(vector<int> numbers);
+VEB test_constructor();
+void test_insert(VEB* vEB, vector<int> numbers);
+void test_successor(VEB vEB, vector<int> numbers);
 
 int main(){
   print_header("VEB TREE TESTS");
@@ -19,14 +20,15 @@ int main(){
   }
 
   // test the vEB tree methods
-  VEB vEB = test_empty_constructor();
-  test_insert(numbers);
+  VEB vEB = test_constructor();
+  test_insert(&vEB, numbers);
+  test_successor(vEB, numbers);
 
   print_footer();
   return 0;
 }
 
-VEB test_empty_constructor(){
+VEB test_constructor(){
   cout << endl << "BUILD EMPTY VEB TREE" << endl;
 
   // initialize an empty vEB tree
@@ -38,19 +40,29 @@ VEB test_empty_constructor(){
   return vEB;
 }
 
-void test_insert(vector<int> numbers){
+void test_insert(VEB* vEB, vector<int> numbers){
   cout << endl << "INSERT" << endl;
 
-  // declare empty vEB tree
-  VEB vEB;
-
   // display the initial heap
-  vEB.display();
+  vEB->display();
 
   // insert and display
   for (int i=0; i<numbers.size(); i++){
-    vEB.insert(numbers[i]);
-    vEB.display();
+    vEB->insert(numbers[i]);
+    vEB->display();
+  }
+}
+
+void test_successor(VEB vEB, vector<int> numbers){
+  cout << endl << "SUCCESSOR" << endl;
+
+  // display vEB tree
+  vEB.display();
+
+  // print successor of each number
+  for (int i=0; i<numbers.size(); i++){
+    cout << "Successor of " << numbers[i] << ": ";
+    cout << vEB.successor(numbers[i]) << endl;
   }
 }
 

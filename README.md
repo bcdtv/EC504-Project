@@ -76,9 +76,6 @@ bool valid();
 // construct an empty vEB tree
 VEB();
 
-// construct a vEB tree from an input vector
-VEB(vector<int> numbers);
-
 // get the next number greater than value
 int successor(int value);
 

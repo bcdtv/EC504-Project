@@ -16,16 +16,10 @@ VEB::VEB(){
   is_empty = true;
 }
 
-// Repeatedly call the insert method to create
-// a vEB tree using a vector of numbers.
-VEB::VEB(vector<int> numbers){
-  for (int i=0; i<numbers.size(); i++){
-    this->insert(numbers[i]);
-  }
-}
-
 int VEB::successor(int value){
-  return 0;
+
+  // use the helper method for recursion
+  return successor_helper(this, value);
 }
 
 int VEB::predecessor(int value){
@@ -90,6 +84,41 @@ int VEB::get_cluster(int value){
   return cluster;
 }
 
+int VEB::get_position(int value){
+  int position;
+  if (value >= 0){
+    position = value % (int) sqrt(INT_MAX);
+  }
+  else{
+    position = abs((int) abs(value) % (int) sqrt(INT_MAX) - (int) sqrt(INT_MAX));
+  }
+  return position;
+}
+
+int VEB::successor_helper(VEB* vEB, int value){
+  // return min if value is less
+  if (value < vEB->min_value){
+    return vEB->min_value;
+  }
+
+  // calculate the cluster this value would belong to
+  int cluster = get_cluster(value);
+
+  // calculate the position of this value within that cluster
+  int position = value % (int) sqrt(INT_MAX);
+
+  // position is less than max of cluster it would belong to
+  if (value < ((vEB->clusters)[cluster]).max_value){
+    // call successor on that cluster
+    return successor_helper(&((vEB->clusters)[cluster]), position);
+  }
+
+  // position is higher, successor is in next non empty cluster
+  else{
+    return 0;
+  }
+}
+
 void VEB::insert_helper(VEB* vEB, int value){
   // tree was empty so simply set min and max values
   if (vEB->is_empty){
@@ -115,13 +144,16 @@ void VEB::insert_helper(VEB* vEB, int value){
   // calculate cluster this value belongs to
   int cluster = get_cluster(value);
 
+  // calculate position within cluster
+  int position = get_position(value);
+
   // if cluster is empty, update the summary structure
   if ((vEB->summary)[cluster] == 0){
     (vEB->summary)[cluster] = 1;
   }
 
   // finally, insert value into the cluster
-  insert_helper(&(vEB->clusters[cluster]), value);
+  insert_helper(&((vEB->clusters)[cluster]), value);
 }
 
 void VEB::display_helper(VEB* vEB){

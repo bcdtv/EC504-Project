@@ -10,7 +10,6 @@ class VEB{
   // public methods
   public:
     VEB();
-    VEB(vector<int> numbers);
     int successor(int value);
     int predecessor(int value);
     void insert(int value);
@@ -31,6 +30,8 @@ class VEB{
   // private methods
   private:
     int get_cluster(int value);
+    int get_position(int value);
+    int successor_helper(VEB* vEB, int value);
     void insert_helper(VEB* vEB, int value);
     void display_helper(VEB* vEB);
 };
