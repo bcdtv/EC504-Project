@@ -47,7 +47,7 @@ command: make test-sort
 BinaryHeap();
 
 // construct a binary from an input vector
-BinaryHeap(vector<int> numbers);
+BinaryHeap(vector<unsigned int> numbers);
 
 // insert a number
 void insert(int value);
@@ -77,25 +77,31 @@ bool valid();
 VEB();
 
 // get the next number greater than value
-int successor(int value);
+unsigned int successor(unsigned int value);
 
 // get the next number less than value
-int predecessor(int value);
+unsigned int predecessor(unsigned int value);
 
 // insert a number
-void insert(int value);
+void insert(unsigned int value);
 
 // remove a number
-void remove(int value);
+void remove(unsigned int value);
 
 // get the min value within the vEB tree
-int min();
+unsigned int min();
 
 // get the max value within the vEB tree
-int max();
+unsigned int max();
 
 // returns true if the vEB tree is empty
 bool empty();
+
+// the number of elements stored in the vEB tree
+unsigned int size();
+
+// retrieve the elements stored in the vEB tree
+vector<unsigned int> elements();
 
 // prints the vEB tree values to stdout
 void display();
