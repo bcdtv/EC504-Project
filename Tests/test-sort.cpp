@@ -56,12 +56,30 @@ int main(){
   elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
   cout << "Sorting time with the binary heap: " << elapsed_time << "ms" << endl;
 
+  // display the sorted numbers
+  if (display){
+    cout << "Sorted numbers: ";
+    for (unsigned int i=0; i<sorted_numbers.size(); i++){
+      cout << sorted_numbers[i] << " ";
+    }
+    cout << endl;
+  }
+
   // benchmark sorting with the vEB tree
   start_time = clock();
   sorted_numbers = sort(&vEB);
   stop_time = clock();
   elapsed_time = (stop_time - start_time) / (double)(CLOCKS_PER_SEC/1000);
   cout << "Sorting time with the vEB tree: " << elapsed_time << "ms" << endl;
+
+  // display the sorted numbers
+  if (display){
+    cout << "Sorted numbers: ";
+    for (unsigned int i=0; i<sorted_numbers.size(); i++){
+      cout << sorted_numbers[i] << " ";
+    }
+    cout << endl;
+  }
 
   print_footer();
   return 0;

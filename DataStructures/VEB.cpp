@@ -79,7 +79,8 @@ unsigned int VEB::size(){
 // structure. Look at the helper method
 // for implemenentation.
 vector<unsigned int> VEB::elements(){
-  vector<unsigned int> result;
+  count = 0;
+  vector<unsigned int> result(n);
   elements_helper(this, 0, &result);
   return result;
 }
@@ -281,7 +282,8 @@ void VEB::elements_helper(VEB* vEB, unsigned int base, vector<unsigned int>* res
 
   // vEB is guaranteed to not be empty
   for (unsigned int i=0; i<vEB->min_count; i++){
-    result->push_back(base + vEB->min_value);
+    result->at(count) = base + vEB->min_value;
+    count++;
   }
 
   // get the iterators for the clusters map
