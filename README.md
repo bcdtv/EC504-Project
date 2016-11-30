@@ -26,17 +26,27 @@ _reasoning:_ Simply preference. Most, if not all, have been changed to this styl
 ## Running Tests
 **Binary Heap**  
 command: make test-heap  
- - asks for inputs N, INT_MIN, and INT_MAX
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
  - tests binary heap methods for correctness
+ - each method is tested seperately
+ - prints results to stdout
+
+**VEB Tree**  
+command: make test-veb  
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
+ - tests vEB tree methods for correctness
  - each method is tested seperately
  - prints results to stdout
 
 **Sorting Benchmarks**  
 command: make test-sort  
- - asks for inputs N, INT_MIN, and INT_MAX
- - times how long it takes to sort an array of numbers
- - repeated for each data structure
- - stores results in Tests/results folder
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
+ - times how long it takes to store the random numbers in each data structure
+ - times how long it takes to return a sorted array from each data structure
+ - prints results to stdout
 
 ---
  
