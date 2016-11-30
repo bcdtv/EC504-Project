@@ -89,6 +89,11 @@ unsigned int VEB::successor_helper(VEB* vEB, unsigned int value){
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
+  // handle empty vEB tree
+  if (vEB->is_empty){
+    return 0;
+  }
+
   // return min if value is less than vEB min
   if (value < vEB->min_value){
     return vEB->min_value;
@@ -128,7 +133,47 @@ unsigned int VEB::successor_helper(VEB* vEB, unsigned int value){
 }
 
 unsigned int VEB::predecessor_helper(VEB* vEB, unsigned int value){
-  return 0;
+  // make sure the summary structure is initialized
+  if (vEB->summary == NULL){
+    vEB->summary = new VEB(sqrt(vEB->u));
+  }
+
+  // handle empty vEB tree
+  if (vEB->is_empty){
+    return 0;
+  }
+
+  // return max if value is greater than vEB max
+  if (value > vEB->max_value){
+    return vEB->max_value;
+  }
+
+  // calculate the cluster this value would belong to
+  unsigned int cluster_i =  value / ((unsigned int) sqrt(vEB->u));
+
+  // calculate the position of this value within its cluster
+  unsigned int position = value % ((unsigned int) sqrt(vEB->u));
+
+  // check if that cluster even exists
+  bool exists;
+  try{
+    (vEB->clusters).at(cluster_i);
+    exists = true;
+  }
+  catch (exception out_of_range){
+    exists = false;
+  }
+
+  // predecessor is within the cluster this value would belong to
+  if (exists && position > ((vEB->clusters)[cluster_i]).min_value){
+    unsigned int base = value - position;
+    return base + predecessor_helper(&((vEB->clusters)[cluster_i]), position);
+  }
+
+  // predecessor is in previous non empty cluster
+  unsigned int previous_cluster = predecessor_helper(vEB->summary, cluster_i);
+  unsigned int base = ((vEB->clusters)[previous_cluster]).u * previous_cluster;
+  return base + ((vEB->clusters)[previous_cluster]).max_value;
 }
 
 void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
@@ -142,19 +187,13 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
     vEB->min_value = value;
     vEB->min_count = count;
     vEB->max_value = value;
-    vEB->max_count = count;
     vEB->is_empty = false;
     return;
   }
 
   // value equals min, simply increment min count
   if (value == vEB->min_value){
-    (vEB->min_count)++;
-    return;
-  }
-
-  // terminate recursion if at base vEB tree
-  if (vEB->u <= 1){
+    vEB->min_count = vEB->min_count + count;
     return;
   }
 
@@ -168,15 +207,9 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
     count = temp;
   }
 
-  // if required, increment max count
-  if (value == vEB->max_value){
-    (vEB->max_count)++;
-  }
-
   // if required, update max value
   if (value > vEB->max_value){
     vEB->max_value = value;
-    vEB->max_count = count;
   }
 
   // calculate cluster this value belongs to
@@ -208,14 +241,14 @@ void VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 }
 
 void VEB::display_helper(VEB* vEB, unsigned int base){
-  // vEB is guaranteed to not be empty
-  for (unsigned int i=0; i<vEB->min_count; i++){
-    cout << base + vEB->min_value << " ";
-  }
-
   // make sure the summary structure is initialized
   if (vEB->summary == NULL){
     vEB->summary = new VEB(sqrt(vEB->u));
+  }
+
+  // vEB is guaranteed to not be empty
+  for (unsigned int i=0; i<vEB->min_count; i++){
+    cout << base + vEB->min_value << " ";
   }
 
   // get the iterators for the clusters map

@@ -8,6 +8,7 @@ using namespace std;
 VEB test_constructor();
 void test_insert(VEB* vEB, vector<int> numbers);
 void test_successor(VEB vEB, vector<int> numbers);
+void test_predecessor(VEB vEB, vector<int> numbers);
 
 int main(){
   print_header("VEB TREE TESTS");
@@ -23,6 +24,7 @@ int main(){
   VEB vEB = test_constructor();
   test_insert(&vEB, numbers);
   test_successor(vEB, numbers);
+  //test_predecessor(vEB, numbers);
 
   print_footer();
   return 0;
@@ -63,6 +65,19 @@ void test_successor(VEB vEB, vector<int> numbers){
   for (int i=0; i<numbers.size(); i++){
     cout << "Successor of " << numbers[i] << ": ";
     cout << vEB.successor(numbers[i]) << endl;
+  }
+}
+
+void test_predecessor(VEB vEB, vector<int> numbers){
+  cout << endl << "PREDECESSOR" << endl;
+
+  // display vEB tree
+  vEB.display();
+
+  // print predecessor of each number
+  for (int i=0; i<numbers.size(); i++){
+    cout << "Predecessor of " << numbers[i] << ": ";
+    cout << vEB.predecessor(numbers[i]) << endl;
   }
 }
 

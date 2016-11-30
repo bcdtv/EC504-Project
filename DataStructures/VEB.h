@@ -24,7 +24,6 @@ class VEB{
     unsigned int min_value;
     unsigned int min_count;
     unsigned int max_value;
-    unsigned int max_count;
     bool is_empty;
     VEB* summary;
     map<unsigned int, VEB> clusters;
