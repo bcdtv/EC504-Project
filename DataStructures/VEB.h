@@ -2,7 +2,6 @@
 #define V_EB_H
 
 #include <map>
-#include <vector>
 
 using namespace std;
 
@@ -10,30 +9,34 @@ class VEB{
   // public methods
   public:
     VEB();
-    int successor(int value);
-    int predecessor(int value);
-    void insert(int value);
-    void remove(int value);
-    int min();
-    int max();
+    unsigned int successor(unsigned int value);
+    unsigned int predecessor(unsigned int value);
+    void insert(unsigned int value);
+    void remove(unsigned int value);
+    unsigned int min();
+    unsigned int max();
     bool empty();
     void display();
 
   // private fields
   private:
-    int min_value;
-    int max_value;
+    unsigned int u;
+    unsigned int min_value;
+    unsigned int min_count;
+    unsigned int max_value;
+    unsigned int max_count;
     bool is_empty;
-    vector<int> summary;
-    map<int, VEB> clusters;
+    VEB* summary;
+    map<unsigned int, VEB> clusters;
 
   // private methods
   private:
-    int get_cluster(int value);
-    int get_position(int value);
-    int successor_helper(VEB* vEB, int value);
-    void insert_helper(VEB* vEB, int value);
-    void display_helper(VEB* vEB);
+    VEB(unsigned int u);
+    unsigned int successor_helper(VEB* vEB, unsigned int value);
+    unsigned int predecessor_helper(VEB* vEB, unsigned int value);
+    void insert_helper(VEB* vEB, unsigned int value, unsigned int count);
+    void remove_helper(VEB* vEB, unsigned int value, unsigned int count);
+    void display_helper(VEB* vEB, unsigned int base);
 };
 
 #endif
