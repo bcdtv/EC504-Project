@@ -133,12 +133,8 @@ unsigned int VEB::successor_helper(VEB* vEB, unsigned int value){
   unsigned int position = value % ((unsigned int) sqrt(vEB->u));
 
   // check if that cluster even exists
-  bool exists;
-  try{
-    (vEB->clusters).at(cluster_i);
-    exists = true;
-  }
-  catch (exception out_of_range){
+  bool exists = true;
+  if ((vEB->clusters)[cluster_i].is_empty){
     exists = false;
   }
 
@@ -177,12 +173,8 @@ unsigned int VEB::predecessor_helper(VEB* vEB, unsigned int value){
   unsigned int position = value % ((unsigned int) sqrt(vEB->u));
 
   // check if that cluster even exists
-  bool exists;
-  try{
-    (vEB->clusters).at(cluster_i);
-    exists = true;
-  }
-  catch (exception out_of_range){
+  bool exists = true;
+  if ((vEB->clusters)[cluster_i].is_empty){
     exists = false;
   }
 
@@ -253,10 +245,7 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
   unsigned int position = value % ((unsigned int) sqrt(vEB->u));
 
   // if required, create the cluster
-  try{
-    VEB cluster = (vEB->clusters).at(cluster_i);
-  }
-  catch (exception out_of_range){
+  if ((vEB->clusters)[cluster_i].is_empty){
     VEB cluster = VEB(sqrt(vEB->u));
     (vEB->clusters)[cluster_i] = cluster;
   }
