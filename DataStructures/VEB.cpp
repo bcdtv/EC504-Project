@@ -89,27 +89,42 @@ unsigned int VEB::successor_helper(VEB* vEB, unsigned int value){
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
-  // return min if value is less
+  // return min if value is less than vEB min
   if (value < vEB->min_value){
     return vEB->min_value;
   }
 
+  // if value hits limit, return universe size
+  if (value >= vEB->max_value){
+    return vEB->u;
+  }
+
   // calculate the cluster this value would belong to
-  unsigned int cluster =  value / ((unsigned int) sqrt(vEB->u));
+  unsigned int cluster_i =  value / ((unsigned int) sqrt(vEB->u));
 
   // calculate the position of this value within its cluster
   unsigned int position = value % ((unsigned int) sqrt(vEB->u));
 
-  // position is less than max of cluster it would belong to
-  if (value < ((vEB->clusters)[cluster]).max_value){
-    // call successor on that cluster
-    return successor_helper(&((vEB->clusters)[cluster]), position);
+  // check if that cluster even exists
+  bool exists;
+  try{
+    (vEB->clusters).at(cluster_i);
+    exists = true;
+  }
+  catch (exception out_of_range){
+    exists = false;
   }
 
-  // position is higher, successor is in next non empty cluster
-  else{
-    return 0;
+  // successor is within the cluster this value would belong to
+  if (exists && position < ((vEB->clusters)[cluster_i]).max_value){
+    unsigned int base = value - position;
+    return base + successor_helper(&((vEB->clusters)[cluster_i]), position);
   }
+
+  // successor is in next non empty cluster
+  unsigned int next_cluster = successor_helper(vEB->summary, cluster_i);
+  unsigned int base = ((vEB->clusters)[next_cluster]).u * next_cluster;
+  return base + ((vEB->clusters)[next_cluster]).min_value;
 }
 
 unsigned int VEB::predecessor_helper(VEB* vEB, unsigned int value){
