@@ -16,8 +16,11 @@ BinaryHeap::BinaryHeap(){
 // This constructor builds a binary heap by 
 // treating an input array as a complete binary 
 // tree and calling heapify down on each node.
-BinaryHeap::BinaryHeap(vector<int> numbers){
-  this->nodes = numbers;
+BinaryHeap::BinaryHeap(vector<unsigned int> numbers){
+  this->nodes = vector<int>(numbers.size());
+  for (int i=0; i<numbers.size(); i++){
+    this->nodes[i] = (int) numbers[i];
+  }
   for(int i=nodes.size()-1; i>=0; i--){
     heapify_down(i);
   }

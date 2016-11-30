@@ -5,79 +5,102 @@
 
 using namespace std;
 
-VEB test_constructor();
-void test_insert(VEB* vEB, vector<int> numbers);
-void test_successor(VEB vEB, vector<int> numbers);
-void test_predecessor(VEB vEB, vector<int> numbers);
+VEB test_constructor(bool display);
+void test_insert(VEB* vEB, vector<unsigned int> numbers, bool display);
+void test_successor(VEB vEB, vector<unsigned int> numbers, bool display);
+void test_predecessor(VEB vEB, vector<unsigned int> numbers, bool display);
 
 int main(){
   print_header("VEB TREE TESTS");
 
+  // request display boolean
+  bool display;
+  cout << "display? (0/1): ";
+  cin >> display;
+
   // generate a sample vector of numbers for testing
-  vector<int> numbers = generate_numbers();
+  vector<unsigned int> numbers = generate_numbers(display);
   if (numbers.empty()){
     print_footer();
     return 0;
   }
 
   // test the vEB tree methods
-  VEB vEB = test_constructor();
-  test_insert(&vEB, numbers);
-  test_successor(vEB, numbers);
-  //test_predecessor(vEB, numbers);
+  VEB vEB = test_constructor(display);
+  test_insert(&vEB, numbers, display);
+  test_successor(vEB, numbers, display);
+  test_predecessor(vEB, numbers, display);
 
   print_footer();
   return 0;
 }
 
-VEB test_constructor(){
+VEB test_constructor(bool display){
   cout << endl << "BUILD EMPTY VEB TREE" << endl;
 
   // initialize an empty vEB tree
   VEB vEB = VEB();
 
   // display the vEB tree
-  vEB.display();
+  if (display){
+    vEB.display();
+  }
 
   return vEB;
 }
 
-void test_insert(VEB* vEB, vector<int> numbers){
+void test_insert(VEB* vEB, vector<unsigned int> numbers, bool display){
   cout << endl << "INSERT" << endl;
 
   // display the initial heap
-  vEB->display();
+  if (display){
+    vEB->display();
+  }
 
   // insert and display
-  for (int i=0; i<numbers.size(); i++){
+  for (unsigned int i=0; i<numbers.size(); i++){
     vEB->insert(numbers[i]);
-    vEB->display();
+    if (display){
+      vEB->display();
+    }
   }
 }
 
-void test_successor(VEB vEB, vector<int> numbers){
+void test_successor(VEB vEB, vector<unsigned int> numbers, bool display){
   cout << endl << "SUCCESSOR" << endl;
 
   // display vEB tree
-  vEB.display();
+  if (display){
+    vEB.display();
+  }
 
-  // print successor of each number
-  for (int i=0; i<numbers.size(); i++){
-    cout << "Successor of " << numbers[i] << ": ";
-    cout << vEB.successor(numbers[i]) << endl;
+  // retrieve and display successor of each number
+  unsigned int successor;
+  for (unsigned int i=0; i<numbers.size(); i++){
+    successor = vEB.successor(numbers[i]);
+    if (display){
+      cout << "Successor of " << numbers[i] << ": ";
+      cout << successor << endl; 
+    }
   }
 }
 
-void test_predecessor(VEB vEB, vector<int> numbers){
+void test_predecessor(VEB vEB, vector<unsigned int> numbers, bool display){
   cout << endl << "PREDECESSOR" << endl;
 
   // display vEB tree
-  vEB.display();
+  if (display){
+    vEB.display();
+  }
 
-  // print predecessor of each number
-  for (int i=0; i<numbers.size(); i++){
-    cout << "Predecessor of " << numbers[i] << ": ";
-    cout << vEB.predecessor(numbers[i]) << endl;
+  // retrieve and display predecessor of each number
+  unsigned int predecessor;
+  for (unsigned int i=0; i<numbers.size(); i++){
+    predecessor = vEB.predecessor(numbers[i]);
+    if (display){
+      cout << "Predecessor of " << numbers[i] << ": ";
+      cout << predecessor << endl;
+    }
   }
 }
 

@@ -16,6 +16,8 @@ class VEB{
     unsigned int min();
     unsigned int max();
     bool empty();
+    unsigned int size();
+    vector<unsigned int> elements();
     void display();
 
   // private fields
@@ -25,6 +27,7 @@ class VEB{
     unsigned int min_count;
     unsigned int max_value;
     bool is_empty;
+    unsigned int n;
     VEB* summary;
     map<unsigned int, VEB> clusters;
 
@@ -34,7 +37,8 @@ class VEB{
     unsigned int successor_helper(VEB* vEB, unsigned int value);
     unsigned int predecessor_helper(VEB* vEB, unsigned int value);
     void insert_helper(VEB* vEB, unsigned int value, unsigned int count);
-    void remove_helper(VEB* vEB, unsigned int value, unsigned int count);
+    unsigned int remove_helper(VEB* vEB, unsigned int value, unsigned int count);
+    void elements_helper(VEB* vEB, unsigned int base, vector<unsigned int>* result);
     void display_helper(VEB* vEB, unsigned int base);
 };
 

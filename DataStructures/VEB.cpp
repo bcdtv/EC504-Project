@@ -12,8 +12,9 @@ using namespace std;
 // A constructor for creating an empty vEB tree.
 VEB::VEB(){
   u = UINT_MAX;
-  summary = NULL;
   is_empty = true;
+  n = 0;
+  summary = NULL;
 }
 
 // Retrieve the next value within the vEB tree.
@@ -38,6 +39,7 @@ unsigned int VEB::predecessor(unsigned int value){
 // helper method for implementation.
 void VEB::insert(unsigned int value){
   insert_helper(this, value, 1);
+  n++;
 }
 
 // Remove a value from within the vEB tree.
@@ -45,7 +47,9 @@ void VEB::insert(unsigned int value){
 // tree is a recursive data structure. Look at
 // the helper method for implementation.
 void VEB::remove(unsigned int value){
-  remove_helper(this, value, 1);
+  if (remove_helper(this, value, 1)){
+    n--;
+  }
 }
 
 // Return the minimum value stored.
@@ -61,6 +65,23 @@ unsigned int VEB::max(){
 // Returns true if the vEB tree is empty.
 bool VEB::empty(){
   return is_empty; 
+}
+
+// Returns the number of elements stored
+// in the vEB tree.
+unsigned int VEB::size(){
+  return n;
+}
+
+// Returns the elements stored in the
+// vEB tree. This is done using recursion
+// because the vEB tree is a recursive data
+// structure. Look at the helper method
+// for implemenentation.
+vector<unsigned int> VEB::elements(){
+  vector<unsigned int> result;
+  elements_helper(this, 0, &result);
+  return result;
 }
 
 // Display all the values within the vEB tree.
@@ -79,8 +100,8 @@ void VEB::display(){
 // ============ Private Method Implementations ===========
 VEB::VEB(unsigned int u){
   this->u = u;
-  summary = NULL;
   is_empty = true;
+  summary = NULL;
 }
 
 unsigned int VEB::successor_helper(VEB* vEB, unsigned int value){
@@ -126,7 +147,7 @@ unsigned int VEB::successor_helper(VEB* vEB, unsigned int value){
     return base + successor_helper(&((vEB->clusters)[cluster_i]), position);
   }
 
-  // successor is in next non empty cluster
+  // successor is min value of next non empty cluster
   unsigned int next_cluster = successor_helper(vEB->summary, cluster_i);
   unsigned int base = ((vEB->clusters)[next_cluster]).u * next_cluster;
   return base + ((vEB->clusters)[next_cluster]).min_value;
@@ -170,8 +191,20 @@ unsigned int VEB::predecessor_helper(VEB* vEB, unsigned int value){
     return base + predecessor_helper(&((vEB->clusters)[cluster_i]), position);
   }
 
-  // predecessor is in previous non empty cluster
+  // get the previous cluster
   unsigned int previous_cluster = predecessor_helper(vEB->summary, cluster_i);
+
+  // there is no previous cluster
+  if (cluster_i == previous_cluster){
+    if (exists){
+      return ((vEB->clusters)[cluster_i]).min_value;
+    }
+    else{
+      return 0;
+    }
+  }
+
+  // predecessor is max value of previous non empty cluster 
   unsigned int base = ((vEB->clusters)[previous_cluster]).u * previous_cluster;
   return base + ((vEB->clusters)[previous_cluster]).max_value;
 }
@@ -236,8 +269,39 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
   }
 }
 
-void VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
+unsigned int VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
+  return 0;
+}
 
+void VEB::elements_helper(VEB* vEB, unsigned int base, vector<unsigned int>* result){
+  // make sure the summary structure is initialized
+  if (vEB->summary == NULL){
+    vEB->summary = new VEB(sqrt(vEB->u));
+  }
+
+  // vEB is guaranteed to not be empty
+  for (unsigned int i=0; i<vEB->min_count; i++){
+    result->push_back(base + vEB->min_value);
+  }
+
+  // get the iterators for the clusters map
+  map<unsigned int, VEB>::iterator it = vEB->clusters.begin();
+  map<unsigned int, VEB>::iterator end = vEB->clusters.end();
+
+  // retrieve the keys of non empty clusters
+  vector<unsigned int> keys;
+  for (it; it != end; ++it){
+    keys.push_back(it->first);
+  } 
+
+  // sort the keys to ensure values are printed in order
+  sort(keys.begin(), keys.end());
+
+  // get elements of each cluster
+  for (unsigned int i=0; i<keys.size(); i++){
+    unsigned int new_base = ((vEB->clusters)[keys[i]]).u * keys[i] + base;
+    elements_helper(&((vEB->clusters)[keys[i]]), new_base, result);
+  }
 }
 
 void VEB::display_helper(VEB* vEB, unsigned int base){

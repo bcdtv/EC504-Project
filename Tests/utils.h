@@ -19,11 +19,11 @@ void print_footer(){
   cout << endl << endl;
 }
 
-vector<int> generate_numbers(){
+vector<unsigned int> generate_numbers(bool display){
   // declare parameters
-  int N;
-  int MIN_INT;
-  int MAX_INT;
+  unsigned int N;
+  unsigned int MIN_INT;
+  unsigned int MAX_INT;
 
   // request parameters
   cout << "N: ";
@@ -36,26 +36,28 @@ vector<int> generate_numbers(){
   // validate given parameters
   if (N <= 0){
     cout << "Error: N is not greater than 0" << endl;
-    vector<int> empty;
+    vector<unsigned int> empty;
     return empty;
   }
   if (MIN_INT >= MAX_INT){
     cout << "Error: MIN_INT is not less than MAX_INT" << endl;
-    vector<int> empty;
+    vector<unsigned int> empty;
     return empty;
   }
   
   // generate numbers and store into vector
-  vector<int> numbers(N);
+  vector<unsigned int> numbers(N);
   srand(time(NULL));
-  for (int i=0; i<N; i++){
+  for (unsigned int i=0; i<N; i++){
     numbers[i] = MIN_INT + (rand() % (MAX_INT-MIN_INT+1));
   }
 
   // display the numbers
   cout << "Random numbers: ";
-  for (int i=0; i<numbers.size(); i++){
-    cout << numbers[i] << " ";
+  if (display){
+    for (unsigned int i=0; i<numbers.size(); i++){
+      cout << numbers[i] << " ";
+    }
   }
   cout << endl;
 

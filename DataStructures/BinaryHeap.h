@@ -13,7 +13,7 @@ class BinaryHeap{
   // public methods
   public:
     BinaryHeap();
-    BinaryHeap(vector<int> numbers);
+    BinaryHeap(vector<unsigned int> numbers);
     void insert(int value);
     void remove(int value);
     int extract_min();  

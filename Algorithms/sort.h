@@ -7,7 +7,7 @@
 
 using namespace std;
 
-vector<int> sort(BinaryHeap* heap);
-vector<int> sort(VEB* vEB, int method);
+vector<unsigned int> sort(BinaryHeap* heap);
+vector<unsigned int> sort(VEB* vEB);
 
 #endif
