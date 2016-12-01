@@ -9,6 +9,8 @@ class VEB{
   // public methods
   public:
     VEB();
+    VEB(const VEB& other);
+    VEB& operator=(const VEB& other);
     unsigned int successor(unsigned int value);
     unsigned int predecessor(unsigned int value);
     void insert(unsigned int value);
@@ -28,7 +30,6 @@ class VEB{
     unsigned int max_value;
     bool is_empty;
     unsigned int n;
-    unsigned int count;
     VEB* summary;
     map<unsigned int, VEB> clusters;
 

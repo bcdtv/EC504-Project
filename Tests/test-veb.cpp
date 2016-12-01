@@ -9,6 +9,7 @@ VEB test_constructor(bool display);
 void test_insert(VEB* vEB, vector<unsigned int> numbers, bool display);
 void test_successor(VEB vEB, vector<unsigned int> numbers, bool display);
 void test_predecessor(VEB vEB, vector<unsigned int> numbers, bool display);
+void test_remove(VEB* vEB, vector<unsigned int> numbers, bool display);
 
 int main(){
   print_header("VEB TREE TESTS");
@@ -30,6 +31,7 @@ int main(){
   test_insert(&vEB, numbers, display);
   test_successor(vEB, numbers, display);
   test_predecessor(vEB, numbers, display);
+  //test_remove(&vEB, numbers, display);
 
   print_footer();
   return 0;
@@ -104,6 +106,22 @@ void test_predecessor(VEB vEB, vector<unsigned int> numbers, bool display){
   }
 }
 
+void test_remove(VEB* vEB, vector<unsigned int> numbers, bool display){
+  cout << endl << "REMOVE" << endl;
+
+  // display vEB tree
+  if (display){
+    vEB->display();
+  }
+
+  // remove and display
+  for (unsigned int i=0; i<numbers.size(); i++){
+    vEB->remove(numbers[i]);
+    if (display){
+      vEB->display();
+    }
+  }
+}
 
 
 
