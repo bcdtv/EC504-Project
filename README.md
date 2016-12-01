@@ -86,6 +86,15 @@ bool valid();
 // construct an empty vEB tree
 VEB();
 
+// create a new vEB tree by copying another
+VEB(const VEB& other);
+
+// destroy a vEB tree
+~VEB();
+
+// replace a vEB tree with the values of another
+VEB& operator=(const VEB& other);
+
 // get the next number greater than value
 unsigned int successor(unsigned int value);
 

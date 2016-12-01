@@ -17,10 +17,10 @@ VEB::VEB(){
   summary = NULL;
 }
 
-// The copy constructor for deep copying the
-// summary structure
+// Copy constructor required for deep copying 
+// the summary structure in dynamic memory.
 VEB::VEB(const VEB& other){
-  // copy simple fields
+  // copy simple fields using assignment
   u = other.u;
   min_value = other.min_value;
   min_count = other.min_count;
@@ -29,7 +29,7 @@ VEB::VEB(const VEB& other){
   n = other.n;
   clusters = other.clusters;
 
-  // copy the summary structure
+  // deep copy the summary structure
   if (other.summary == NULL){
     summary = NULL;
   }
@@ -42,15 +42,42 @@ VEB::VEB(const VEB& other){
   }
 }
 
+// An explicit destructor is required to 
+// destroy the summary structure which is
+// stored in dynamic memory.
+VEB::~VEB(){
+  delete summary;
+  summary = NULL;
+}
+
+// Copy assignment operator required for 
+// deep copying the summary structure in 
+// dynamic memory.
 VEB& VEB::operator=(const VEB& other){
-  // copy simple fields
+  // copy simple fields using assignment
   u = other.u;
   min_value = other.min_value;
+  min_count = other.min_count;
   max_value = other.max_value;
   is_empty = other.is_empty;
   n = other.n;
-  summary = other.summary;
   clusters = other.clusters;
+
+  // destroy current summary structure
+  delete summary;
+
+  // deep copy the summary structure
+  if (other.summary == NULL){
+    summary = NULL;
+  }
+  else{
+    summary = new VEB();
+    vector<unsigned int> elements = other.summary->elements();
+    for (unsigned int i=0; i<elements.size(); i++){
+      summary->insert(elements[i]);
+    }
+  }
+
   return *this;
 }
 
@@ -290,7 +317,7 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
   }
 }
 
-unsigned int VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
+bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
   // make sure the summary structure is initialized
   if (vEB->summary == NULL){
     vEB->summary = new VEB(sqrt(vEB->u));
@@ -302,14 +329,14 @@ unsigned int VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count
     if (vEB->min_count <= 0){
       vEB->is_empty = true;
     }
-    return 1;
+    return true;
   }
 
   // special case 1
   if (value == vEB->min_value){
     if (vEB->summary->is_empty){
       vEB->min_value = vEB->max_value;
-      return 1;
+      return true;
     }
     else{
       value = (vEB->clusters)[vEB->summary->min_value].min_value;
@@ -321,17 +348,16 @@ unsigned int VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count
   if (value == vEB->max_value){
     if (vEB->summary->is_empty){
       vEB->max_value = vEB->min_value;
-      return 1;
+      return true;
     }
     else{
       vEB->max_value = (vEB->clusters)[vEB->summary->max_value].max_value;
     }
   }
 
-
   // special case 3
   if (vEB->summary->is_empty){
-    return 0;
+    return false;
   }
   
   // calculate cluster this value belongs to
@@ -348,7 +374,7 @@ unsigned int VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count
     remove_helper(vEB->summary, cluster_i, count);
   }
 
-  return 1;
+  return true;
 }
 
 void VEB::elements_helper(VEB* vEB, unsigned int base, vector<unsigned int>* result){
