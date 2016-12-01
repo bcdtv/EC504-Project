@@ -224,6 +224,11 @@ unsigned int VEB::predecessor_helper(VEB* vEB, unsigned int value){
     return 0;
   }
 
+  // handle min case
+  if (value <= vEB->min_value){
+    return vEB->min_value;
+  }
+
   // handle max case
   if (value > vEB->max_value){
     return vEB->max_value;
