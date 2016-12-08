@@ -161,17 +161,23 @@ BST::~BST()
 
 ### Deque
 ```c++
-// create an empty deque
+// create an empty Deque
 Deque::Deque()
 
 // construct a Deque from an input vector
 Deque::Deque(std::vector<int> numbers)
 
-// insert a number
-void Deque::insert(int value)
+// push a number onto the front
+void Deque::push_front(int value)
 
-// remove a number
-void Deque::remove(int value)
+// push a number onto the back
+void Deque::push_back(int value)
+
+// pop a number from the front
+int Deque::pop_front()
+
+// pop a number from the back
+int Deque::pop_back()
 
 // extract the minimum element
 int Deque::extractMin()
@@ -179,10 +185,10 @@ int Deque::extractMin()
 // get if the Deque is empty
 bool Deque::isEmpty()
 
-// get the next number greater than value
+// get the next number greater than value (does not pop)
 int Deque::successor(int value)
 
-// get the next number less than value
+// get the next number less than value (does not pop)
 int Deque::predecessor(int value)
 
 // get all the nodes in a vector
