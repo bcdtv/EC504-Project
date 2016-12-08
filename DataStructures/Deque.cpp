@@ -5,21 +5,24 @@
 // create an empty Deque
 Deque::Deque()
 {
-        nodes = new std::vector<int>();
+        nodes = new std::deque<int>();
 }
 
 // construct a Deque from an input vector
 Deque::Deque(std::vector<int> numbers)
 {
-        nodes = new std::vector<int>();
+        nodes = new std::deque<int>();
 
-        *nodes = numbers;
+        for(int i = 0; i < numbers.size(); i++)
+        {
+                nodes->push_back(numbers[i]);
+        }
 }
 
 // push a number onto the front
 void Deque::push_front(int value)
 {
-        nodes->insert(nodes->begin(), value);
+        nodes->push_front(value);
 }
 
 // push a number onto the back
@@ -34,9 +37,9 @@ int Deque::pop_front()
         if(nodes->size() == 0)
                 throw -1;
 
-        int result = (*nodes)[0];
+        int result = nodes->front();
 
-        nodes->erase(nodes->begin());
+        nodes->pop_front();
 
         return result;
 }
@@ -47,7 +50,7 @@ int Deque::pop_back()
         if(nodes->size() == 0)
                 throw -1;
 
-        int result = (*nodes)[nodes->size() - 1];
+        int result = nodes->back();
 
         nodes->pop_back();
 
@@ -135,7 +138,16 @@ int Deque::predecessor(int value)
 // get all the nodes in a vector
 std::vector<int> Deque::getNodes()
 {
-        return *nodes;
+        std::vector<int> result;
+
+        for(int i = 0; i < nodes->size(); i++)
+        {
+                result.push_back(nodes->front());
+
+                nodes->pop_front();
+        }
+
+        return result;
 }
 
 // destructor

@@ -1,9 +1,10 @@
+#include <deque>
 #include <vector>
 
 class Deque
 {
 private:
-        std::vector<int>* nodes;
+        std::deque<int>* nodes;
 public:
         // create an empty Deque
         Deque();
