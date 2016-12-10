@@ -40,6 +40,23 @@ BstNode* Insert(BstNode* root , int data)
 	}
 
 
+int FindMin (BstNode* root)
+{
+	if (root == NULL)
+	{
+		cout << "Tree is empty"<<endl ;
+		return -1 ;
+	}
+    else 
+    	if (root->left == NULL )
+    	{
+    		return root->data;
+    	}
+
+    return FindMin(root->left);
+
+}
+
 
 
 int main()
@@ -48,11 +65,7 @@ int main()
 BstNode* root ;
 root = NULL ;
 
-root = Insert(root , 10);
-root = Insert(root , 20);
-root = Insert(root, 5000);
-root = Insert(root, 6000);
-//rootPtr = NULL ;
+
 
 
 }
