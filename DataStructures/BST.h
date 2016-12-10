@@ -11,6 +11,9 @@ class BST{
     void insert(int value); 
     void remove(int value);
     int min();
+    int max();
+    void display();
+    bool valid();
 
   // private fields
   private:
@@ -25,11 +28,8 @@ class BST{
     void insert_helper(BST* root, int value);
     void remove_helper(BST* root, int value);
     int min_helper(BST* root);
+    int max_helper(BST* root);
+    void display_helper(BST* root);
+    bool valid_helper(BST* root);
 };
-
-
-
-
-
-
 #endif
