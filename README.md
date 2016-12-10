@@ -136,10 +136,10 @@ void display();
 
 ### Binary Search Tree
 ```c++
-// create a Binary Search Tree with default value 0
+// create a binary search tree with default value 0
 BST()
 
-// create a Binary Search Tree with given value
+// create a binary search tree with given value
 BST(int value);
 
 // get the next number greater than value
@@ -169,41 +169,41 @@ bool valid();
 
 ### Deque
 ```c++
-// create an empty Deque
-Deque::Deque()
+// create an empty deque
+Deque();
 
-// construct a Deque from an input vector
-Deque::Deque(std::vector<int> numbers)
-
-// push a number onto the front
-void Deque::push_front(int value)
-
-// push a number onto the back
-void Deque::push_back(int value)
-
-// pop a number from the front
-int Deque::pop_front()
-
-// pop a number from the back
-int Deque::pop_back()
-
-// extract the minimum element
-int Deque::extractMin()
-
-// get if the Deque is empty
-bool Deque::isEmpty()
-
-// get the next number greater than value (does not pop)
-int Deque::successor(int value)
-
-// get the next number less than value (does not pop)
-int Deque::predecessor(int value)
-
-// get all the nodes in a vector
-std::vector<int> Deque::getNodes()
+// construct a deque from an input vector
+Deque(vector<int> numbers);
 
 // destructor
-Deque::~Deque()
+~Deque();
+
+// get the next number greater than value (does not pop)
+int successor(int value);
+
+// get the next number less than value (does not pop)
+int predecessor(int value);
+
+// push a number onto the front
+void push_front(int value);
+
+// push a number onto the back
+void push_back(int value);
+
+// pop a number from the front
+int pop_front();
+
+// pop a number from the back
+int pop_back();
+
+// extract the minimum element
+int extract_min();
+
+// get if the deque is empty
+bool empty();
+
+// get all the elements stored in the deque
+vector<int> elements();
 ```
 ---
 

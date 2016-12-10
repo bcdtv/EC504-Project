@@ -1,5 +1,5 @@
-#ifndef V_EB_H
-#define V_EB_H
+#ifndef VEB_H
+#define VEB_H
 
 #include <map>
 
@@ -44,5 +44,4 @@ class VEB{
     void elements_helper(VEB* vEB, unsigned int base, vector<unsigned int>* result);
     void display_helper(VEB* vEB, unsigned int base);
 };
-
 #endif

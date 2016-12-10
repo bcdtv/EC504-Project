@@ -5,10 +5,6 @@
 
 using namespace std;
 
-// Because a binary heap is a complete binary tree, it 
-// can be represented using an array. In this case, we
-// use the vector container in order to allow for dynamic size.
-
 class BinaryHeap{
   // public methods
   public:
@@ -33,5 +29,4 @@ class BinaryHeap{
     int get_index(int value); 
     bool valid_subheap(int current_i);
 };
-
 #endif

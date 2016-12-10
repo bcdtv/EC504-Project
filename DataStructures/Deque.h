@@ -1,44 +1,29 @@
+#ifndef DEQUE_H
+#define DEQUE_H
+
 #include <deque>
 #include <vector>
 
-class Deque
-{
-private:
-        std::deque<int>* nodes;
-public:
-        // create an empty Deque
-        Deque();
+using namespace std;
 
-        // construct a Deque from an input vector
-        Deque(std::vector<int> numbers);
+class Deque{
+  // public methods
+  public:
+    Deque();
+    Deque(vector<int> numbers);
+    ~Deque();
+    int successor(int value);
+    int predecessor(int value);
+    void push_front(int value);
+    void push_back(int value);
+    int pop_front();
+    int pop_back();
+    int extract_min();
+    bool empty();
+    vector<int> elements();
 
-        // push a number onto the front
-        void push_front(int value);
-
-        // push a number onto the back
-        void push_back(int value);
-
-        // pop a number from the front
-        int pop_front();
-
-        // pop a number from the back
-        int pop_back();
-
-        // extract the minimum element
-        int extractMin();
-
-        // get if the Deque is empty
-        bool isEmpty();
-
-        // get the next number greater than value (does not pop)
-        int successor(int value);
-
-        // get the next number less than value (does not pop)
-        int predecessor(int value);
-
-        // get all the nodes in a vector
-        std::vector<int> getNodes();
-
-        // destructor
-        ~Deque();
+  // private fields
+  private:
+    deque<int>* nodes;
 };
+#endif
