@@ -173,7 +173,7 @@ bool valid();
 Deque();
 
 // construct a deque from an input vector
-Deque(vector<int> numbers);
+Deque(vector<unsigned int> numbers);
 
 // destructor
 ~Deque();

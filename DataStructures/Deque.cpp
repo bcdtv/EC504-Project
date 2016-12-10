@@ -1,6 +1,8 @@
+#include <climits>
 #include <cstdlib>
-#include <limits>
-#include "deque.h"
+#include <iostream>
+#include <vector>
+#include "Deque.h"
 
 using namespace std;
 
@@ -11,36 +13,48 @@ Deque::Deque(){
 }
 
 // construct a deque from an input vector
-Deque::Deque(vector<int> numbers){
+Deque::Deque(vector<unsigned int> numbers){
   nodes = new deque<int>();
-
   for(int i = 0; i < numbers.size(); i++){
     nodes->push_back(numbers[i]);
   }
 }
 
+// copy constructor
+Deque::Deque(const Deque& other){
+  nodes = new deque<int>();
+  for (int i=0; i<other.nodes->size(); i++){
+    push_back(other.nodes->at(i));
+  }
+}
+
 // destructor
 Deque::~Deque(){
-  delete(nodes);
+  delete nodes;
+}
+
+// copy assignment operator
+Deque& Deque::operator=(const Deque& other){
+  delete nodes;
+  nodes = new deque<int>();
+  for (int i=0; i<other.nodes->size(); i++){
+    push_back(other.nodes->at(i));
+  }
+  return *this;
 }
 
 // get the next number greater than value (does not pop)
 int Deque::successor(int value){
-  int successor = value;
-  int minDiff = numeric_limits<int>::max();
+  int successor = INT_MAX;
 
-  for(int i = 0; i < nodes->size(); i++){
-    if((*nodes)[i] > value){
-      int diff = (*nodes)[i] - value;
-      if(diff < minDiff){
-        minDiff = diff;
-        successor = (*nodes)[i];
-      }
+  for(int i=0; i<nodes->size(); i++){
+    if((nodes->at(i) > value) && (nodes->at(i) < successor) ){
+      successor = nodes->at(i);
     }
   }
 
-  if(successor == value){
-    throw -1;
+  if (successor == INT_MAX){
+    return value;
   }
 
   return successor;
@@ -48,21 +62,16 @@ int Deque::successor(int value){
 
 // get the next number less than value (does not pop)
 int Deque::predecessor(int value){
-  int predecessor = value;
-  int minDiff = numeric_limits<int>::max();
+  int predecessor = INT_MIN;
 
-  for(int i = 0; i < nodes->size(); i++){
-    if((*nodes)[i] < value){
-      int diff = value - (*nodes)[i];
-      if(diff < minDiff){
-        minDiff = diff;
-        predecessor = (*nodes)[i];
-      }
+  for(int i=0; i<nodes->size(); i++){
+    if((nodes->at(i) < value) && (nodes->at(i) > predecessor)){
+      predecessor = nodes->at(i);
     }
   }
 
-  if(predecessor == value){
-    throw -1;
+  if (predecessor == INT_MIN){
+    return value;
   }
 
   return predecessor;
@@ -83,11 +92,8 @@ int Deque::pop_front(){
   if(nodes->size() == 0){
     throw -1;
   }
-
   int result = nodes->front();
-
   nodes->pop_front();
-
   return result;
 }
 
@@ -96,29 +102,22 @@ int Deque::pop_back(){
   if(nodes->size() == 0){
     throw -1;
   }
-
   int result = nodes->back();
-
   nodes->pop_back();
-
   return result;
 }
 
 // extract the minimum element
 int Deque::extract_min(){
-  int min = numeric_limits<int>::min();
-  int minIndex = 0;
-
-  // not necessarily sorted, linear search
-  for(int i = 0; i < nodes->size(); i++){
-    if((*nodes)[i] < min){
-      min = (*nodes)[i];
-      minIndex = 0;
+  int min = INT_MAX;
+  int min_index = 0;
+  for(int i=0; i<nodes->size(); i++){
+    if(nodes->at(i) < min){
+      min = nodes->at(i);
+      min_index = i;
     }
   }
-
-  nodes->erase(nodes->begin() + minIndex);
-
+  nodes->erase(nodes->begin() + min_index);
   return min;
 }
 
@@ -130,13 +129,18 @@ bool Deque::empty(){
 // get all the nodes in a vector
 vector<int> Deque::elements(){
   vector<int> result;
-
-  for(int i = 0; i < nodes->size(); i++){
-    result.push_back(nodes->front());
-    nodes->pop_front();
+  for(int i=0; i<nodes->size(); i++){
+    result.push_back(nodes->at(i));
   }
-
   return result;
+}
+
+void Deque::display(){
+  cout << "Deque: ";
+  for (int i=0; i<nodes->size(); i++){
+    cout << nodes->at(i) << " ";
+  }
+  cout << endl;
 }
 // =======================================================
 

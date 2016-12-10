@@ -10,8 +10,10 @@ class Deque{
   // public methods
   public:
     Deque();
-    Deque(vector<int> numbers);
+    Deque(vector<unsigned int> numbers);
+    Deque(const Deque& other);
     ~Deque();
+    Deque& operator=(const Deque& other);
     int successor(int value);
     int predecessor(int value);
     void push_front(int value);
@@ -21,6 +23,7 @@ class Deque{
     int extract_min();
     bool empty();
     vector<int> elements();
+    void display();
 
   // private fields
   private:
