@@ -44,7 +44,15 @@ command: make test-veb
 command: make test-bst  
  - asks for display option, set display off for large values of N
  - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
- - tests BST methods for correctness
+ - tests binary search tree methods for correctness
+ - each method is tested seperately
+ - prints results to stdout
+
+**Deque**  
+command: make test-deque  
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
+ - tests deque methods for correctness
  - each method is tested seperately
  - prints results to stdout
 
@@ -175,8 +183,14 @@ Deque();
 // construct a deque from an input vector
 Deque(vector<unsigned int> numbers);
 
+// copy constructor
+Deque(const Deque& other);
+
 // destructor
 ~Deque();
+
+// copy assignment operator
+Deque& operator=(const Deque& other);
 
 // get the next number greater than value (does not pop)
 int successor(int value);
@@ -204,6 +218,9 @@ bool empty();
 
 // get all the elements stored in the deque
 vector<int> elements();
+
+// print the values within the deque to stdout
+void display();
 ```
 ---
 
