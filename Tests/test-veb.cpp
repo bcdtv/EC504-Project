@@ -31,7 +31,7 @@ int main(){
   test_insert(&vEB, numbers, display);
   test_successor(vEB, numbers, display);
   test_predecessor(vEB, numbers, display);
-  //test_remove(&vEB, numbers, display);
+  test_remove(&vEB, numbers, display);
 
   print_footer();
   return 0;
@@ -117,8 +117,9 @@ void test_remove(VEB* vEB, vector<unsigned int> numbers, bool display){
   // remove and display
   for (unsigned int i=0; i<numbers.size(); i++){
     vEB->remove(numbers[i]);
-    if (display){
+    if (display && i==0){
       vEB->display();
+      break;
     }
   }
 }

@@ -328,43 +328,45 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
-  // removing last element from vEB tree
+  // handle empty vEB tree
+  if (vEB->is_empty){
+    return false;
+  }
+
+  // removing the last element
   if ((value == vEB->min_value) && (vEB->min_value == vEB->max_value)){
-    vEB->min_count = vEB->min_count - count;
-    if (vEB->min_count <= 0){
-      vEB->is_empty = true;
-    }
+    vEB->is_empty = true;
     return true;
   }
 
-  // special case 1
-  if (value == vEB->min_value){
-    if (vEB->summary->is_empty){
+  // vEB holds two values, removing min so replace min with max
+  if (value == vEB->min_value && vEB->summary->is_empty){
       vEB->min_value = vEB->max_value;
       return true;
-    }
-    else{
-      value = (vEB->clusters)[vEB->summary->min_value].min_value;
-      vEB->min_value = value;
-    }
   }
 
-  // special case 2
+  // replace min with next smallest value, remove next smallest value
+  if (value == vEB->min_value){
+    value = (vEB->clusters)[vEB->summary->min_value].min_value;
+    vEB->min_value = value;
+  }
+
+  // vEB holds two values, removing max so replace max with min
+  if (value == vEB->max_value && vEB->summary->is_empty){
+    vEB->max_value = vEB->min_value;
+    return true;
+  }
+
+  // replace max with next largest value
   if (value == vEB->max_value){
-    if (vEB->summary->is_empty){
-      vEB->max_value = vEB->min_value;
-      return true;
-    }
-    else{
-      vEB->max_value = (vEB->clusters)[vEB->summary->max_value].max_value;
-    }
+    vEB->max_value = (vEB->clusters)[vEB->summary->max_value].max_value;
   }
 
-  // special case 3
-  if (vEB->summary->is_empty){
+  // if value is not min or max and summary is empty, value is not in vEB
+  if (summary->is_empty){
     return false;
   }
-  
+
   // calculate cluster this value belongs to
   unsigned int cluster_i =  value / ((unsigned int) sqrt(vEB->u));
 
@@ -376,7 +378,7 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 
   // if cluster is now empty, update summary structure
   if ((vEB->clusters)[cluster_i].is_empty){
-    remove_helper(vEB->summary, cluster_i, count);
+    remove_helper(vEB->summary, cluster_i, 1);
   }
 
   return true;

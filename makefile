@@ -8,7 +8,11 @@ test-heap:	DataStructures/BinaryHeap.cpp Tests/test-heap.cpp
 test-veb:	DataStructures/VEB.cpp Tests/test-veb.cpp
 		g++ -o test-veb DataStructures/VEB.cpp Tests/test-veb.cpp
 
+test-bst:	DataStructures/BST.cpp Tests/test-bst.cpp
+		g++ -o test-bst DataStructures/BST.cpp Tests/test-bst.cpp
+
 clean:
 	rm -f test-sort
 	rm -f test-heap
 	rm -f test-veb
+	rm -f test-bst
