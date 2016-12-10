@@ -40,6 +40,14 @@ command: make test-veb
  - each method is tested seperately
  - prints results to stdout
 
+**Binary Search Tree**  
+command: make test-bst  
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
+ - tests BST methods for correctness
+ - each method is tested seperately
+ - prints results to stdout
+
 **Sorting Benchmarks**  
 command: make test-sort  
  - asks for display option, set display off for large values of N
@@ -128,35 +136,35 @@ void display();
 
 ### Binary Search Tree
 ```c++
-// create an empty Binary Search Tree
-BST::BST()
+// create a Binary Search Tree with default value 0
+BST()
 
-// construct a BST from an input vector
-BST::BST(std::vector<int> numbers)
-
-// insert a number
-void BST::insert(int value)
-
-// remove a number
-void BST::remove(int value)
-
-// extract the minimum element
-int BST::extractMin()
-
-// get if the BST is empty
-bool BST::isEmpty()
+// create a Binary Search Tree with given value
+BST(int value);
 
 // get the next number greater than value
-int BST::successor(int value)
+int successor(int value);
 
 // get the next number less than value
-int BST::predecessor(int value)
+int predecessor(int value);
 
-// get all the nodes in a vector
-std::vector<int> BST::getNodes()
+// insert a number
+void insert(int value); 
 
-// destructor
-BST::~BST()
+// remove a number
+void remove(int value);
+
+// get the minimum element within the tree
+int min();
+
+// get the maximum element within the tree
+int max();
+
+// print the tree elements to stdout
+void display();
+
+// checks if the tree is a proper binary search tree
+bool valid();
 ```
 
 ### Deque
