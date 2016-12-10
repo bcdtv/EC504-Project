@@ -8,6 +8,7 @@ using namespace std;
 // Constructor for creating a BST with default value 0.
 BST::BST(){
   value = 0;
+  count = 1;
   left = NULL;
   right = NULL;
 };
@@ -15,6 +16,7 @@ BST::BST(){
 // Constructor for creating a BST with a specified value.
 BST::BST(int value){
   this->value = value;
+  count = 1;
   left = NULL;
   right = NULL;
 };
@@ -73,7 +75,54 @@ int BST::successor(int value){
 
 // Retrieve the previous value less than the passed value.
 int BST::predecessor(int value){
-  return 0;
+  // handle min case
+  if (value <= this->min()){
+    return value;
+  }
+
+  // initialize vector to store path to this value
+  vector<int> path;
+
+  // find the node that holds this value
+  BST* current = this;
+  while (current->value != value){
+    if ((value < current->value) && (current->left != NULL)){
+      path.push_back(current->value);
+      current = current->left;
+      continue;
+    }
+    if ((value > current->value) && (current->right != NULL)){
+      path.push_back(current->value);
+      current = current->right;
+      continue;
+    } 
+    break;
+  }
+
+  // return early if value is not found
+  if (current->value != value){
+    return value;
+  }
+
+  // if this value has no left tree, look upwards
+  if (current->left == NULL){
+    for (int i=path.size()-1; i>=0; i--){
+      if (path[i] < value){
+        return path[i];
+      }
+    }
+  }
+
+  // go to left tree
+  current = current->left;
+
+  // go to right most element within left tree
+  while (current->right != NULL){
+    current = current->right;
+  }
+
+  // return that value
+  return current->value;
 }
 
 // Insert a value into the BST. This is done using
@@ -123,14 +172,20 @@ bool BST::valid(){
 
 // ============ Private Method Implementations ===========
 void BST::insert_helper(BST* root, int value){   
+  // value is equal to root value, increment count
+  if (value == root->value){
+    root->count++;
+    return;
+  }
+
   // left BST is empty, create a new BST and insert into left
-  if ((value <= root->value) && (root->left == NULL)){
+  if ((value < root->value) && (root->left == NULL)){
     root->left = new BST(value);
     return;
   }
   
   // insert recursively into left BST
-  if ((value <= root->value) && (root->left != NULL)){
+  if ((value < root->value) && (root->left != NULL)){
     insert_helper(root->left, value);
     return;
   }
@@ -171,7 +226,9 @@ int BST::max_helper(BST* root){
 
 void BST::display_helper(BST* root){
   // print out the root value
-  cout << root->value << " ";
+  for (int i=0; i<root->count; i++){
+    cout << root->value << " ";
+  }
 
   // print out the left tree
   if (root->left != NULL){

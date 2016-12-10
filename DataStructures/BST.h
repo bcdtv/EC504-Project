@@ -18,6 +18,7 @@ class BST{
   // private fields
   private:
     int value;
+    int count;
     BST* left;
     BST* right;
 
