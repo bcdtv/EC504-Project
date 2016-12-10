@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "BST.h"
 
 using namespace std;
@@ -18,18 +19,61 @@ BST::BST(int value){
   right = NULL;
 };
 
-// Retrieve the next value greater than the passed
-// value. This is done using recursion because the
-// BST is a recursive data structure.
+// Retrieve the next value greater than the passed value.
 int BST::successor(int value){
-  return successor_helper(this, value);
+  // handle max case
+  if (value >= this->max()){
+    return value;
+  }
+
+  // initialize vector to store path to this value
+  vector<int> path;
+
+  // find the node that holds this value
+  BST* current = this;
+  while (current->value != value){
+    if ((value < current->value) && (current->left != NULL)){
+      path.push_back(current->value);
+      current = current->left;
+      continue;
+    }
+    if ((value > current->value) && (current->right != NULL)){
+      path.push_back(current->value);
+      current = current->right;
+      continue;
+    } 
+    break;
+  }
+
+  // return early if value is not found
+  if (current->value != value){
+    return value;
+  }
+
+  // if this value has no right tree, look upwards
+  if (current->right == NULL){
+    for (int i=path.size()-1; i>=0; i--){
+      if (path[i] > value){
+        return path[i];
+      }
+    }
+  }
+
+  // go to right tree
+  current = current->right;
+
+  // go to left most element within right tree
+  while (current->left != NULL){
+    current = current->left;
+  }
+
+  // return that value
+  return current->value;
 }
 
-// Retrieve the previous value less than the passed
-// value. This is done using recursion because the 
-// BST is a recursive data structure.
+// Retrieve the previous value less than the passed value.
 int BST::predecessor(int value){
-  return predecessor_helper(this, value);
+  return 0;
 }
 
 // Insert a value into the BST. This is done using
@@ -78,14 +122,6 @@ bool BST::valid(){
 // =======================================================
 
 // ============ Private Method Implementations ===========
-int BST::successor_helper(BST* root , int value){   
-  return -1;
-}
-
-int BST::predecessor_helper(BST* root , int value){   
-  return -1;
-}
-
 void BST::insert_helper(BST* root, int value){   
   // left BST is empty, create a new BST and insert into left
   if ((value <= root->value) && (root->left == NULL)){

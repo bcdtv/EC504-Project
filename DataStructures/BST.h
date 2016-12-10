@@ -23,8 +23,6 @@ class BST{
 
   // private methods
   private:
-    int successor_helper(BST* root, int value);
-    int predecessor_helper(BST* root, int value);
     void insert_helper(BST* root, int value);
     void remove_helper(BST* root, int value);
     int min_helper(BST* root);
