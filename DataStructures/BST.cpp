@@ -200,7 +200,7 @@ void BST::insert_helper(BST* root, int value){
   insert_helper(root->right, value);
 }
 
-void BST::remove_helper(BST* root , int value){  
+void BST::remove_helper(BST* root , int value){
  
 }
 
