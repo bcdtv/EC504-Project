@@ -106,6 +106,15 @@ BST()
 // create a binary search tree with given value
 BST(int value);
 
+// copy constructor for deep copying another BST
+BST(const BST& other);
+
+// destructor for cleaning up dynamic memory
+~BST();
+
+// copy assignment operator for deep copying another BST
+BST& operator=(const BST& other);
+
 // get the next number greater than value
 int successor(int value);
 

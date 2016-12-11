@@ -5,7 +5,8 @@
 using namespace std;
 
 // ============ Public Method Implementations ============
-// Constructor for creating a BST with default value 0.
+// Constructor for creating a BST with
+// default value 0.
 BST::BST(){
   value = 0;
   count = 1;
@@ -13,7 +14,8 @@ BST::BST(){
   right = NULL;
 };
 
-// Constructor for creating a BST with a specified value.
+// Constructor for creating a BST with
+// a specified value.
 BST::BST(int value){
   this->value = value;
   count = 1;
@@ -21,7 +23,53 @@ BST::BST(int value){
   right = NULL;
 };
 
-// Retrieve the next value greater than the passed value.
+// Copy constructor for creating a new 
+// BST by deep copying an existing BST.
+// Accomplished using recursion.
+BST::BST(const BST& other){
+  copy_helper(this, other);
+}
+
+// Destructor for cleaning up left and right 
+// trees which are in dynamic memory.
+BST::~BST(){
+  // delete the left tree
+  if (left != NULL){
+    delete left;
+    left = NULL;
+  }
+
+  // delete the right tree
+  if (right != NULL){
+    delete right;
+    right = NULL;
+  }
+}
+
+// Copy assignment operator for replacing
+// an existing BST with another BST. This
+// is accomplished using recursion.
+BST& BST::operator=(const BST& other){
+  // delete the left tree
+  if (left != NULL){
+    delete left;
+    left = NULL;
+  }
+
+  // delete the right tree
+  if (right != NULL){
+    delete right;
+    right = NULL;
+  }
+
+  // call the recursive copy method
+  copy_helper(this, other);
+
+  return *this;
+}
+
+// Retrieve the next value greater 
+// than the passed value.
 int BST::successor(int value){
   // handle max case
   if (value >= this->max()){
@@ -73,7 +121,8 @@ int BST::successor(int value){
   return current->value;
 }
 
-// Retrieve the previous value less than the passed value.
+// Retrieve the previous value less 
+// than the passed value.
 int BST::predecessor(int value){
   // handle min case
   if (value <= this->min()){
@@ -125,32 +174,30 @@ int BST::predecessor(int value){
   return current->value;
 }
 
-// Insert a value into the BST. This is done using
-// recursion because the BST is a recursive data
-// structure.
+// Insert a value into the BST. This 
+// is done using recursion because the 
+// BST is a recursive data structure.
 void BST::insert(int value){
   insert_helper(this, value);
 }
 
-
-// Remove a value into the BST. This is done using
-// recursion because the BST is a recursive data
-// structure.
+// Remove a value into the BST. This 
+// is done using recursion because the
+// BST is a recursive data structure.
 void BST::remove(int value){
   remove_helper(this, value);
 }
 
-
-// Retrieve the minimum value in the BST. This is
-// done using recursion because the BST is a 
-// recursive data structure.
+// Retrieve the minimum value in the BST. 
+// This is done using recursion because 
+// the BST is a recursive data structure.
 int BST::min(){
   return min_helper(this);
 }
 
-// Retrieve the maximum value in the BST. This is
-// done using recursion because the BST is a
-// recursive data structure.
+// Retrieve the maximum value in the BST. 
+// This is done using recursion because 
+// the BST is a recursive data structure.
 int BST::max(){
   return max_helper(this);
 }
@@ -171,6 +218,29 @@ bool BST::valid(){
 // =======================================================
 
 // ============ Private Method Implementations ===========
+void BST::copy_helper(BST* current, const BST& other){
+  // simple assignment to copy non dynamic fields
+  current->value = other.value;
+  current->count = other.count;
+
+  // preemptively set left and right to NULL
+  current->left = NULL;
+  current->right = NULL;
+
+  // copy left tree
+  if (other.left != NULL){
+    current->left = new BST(other.left->value);
+    const BST tmp = *(other.left);
+    copy_helper(current->left, tmp);
+  }
+
+  // copy right tree
+  if (other.right != NULL){
+    current->right = new BST(other.right->value);
+    const BST tmp = *(other.right);
+    copy_helper(current->right, tmp);
+  }
+}
 void BST::insert_helper(BST* root, int value){   
   // value is equal to root value, increment count
   if (value == root->value){

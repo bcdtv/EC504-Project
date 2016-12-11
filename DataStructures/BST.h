@@ -6,6 +6,9 @@ class BST{
   public:
     BST();
     BST(int value);
+    BST(const BST& other);
+    ~BST();
+    BST& operator=(const BST& other);
     int successor(int value);
     int predecessor(int value);
     void insert(int value); 
@@ -16,7 +19,7 @@ class BST{
     bool valid();
 
   // private fields
-  private:
+  public:
     int value;
     int count;
     BST* left;
@@ -24,6 +27,7 @@ class BST{
 
   // private methods
   private:
+    void copy_helper(BST* current, const BST& other);
     void insert_helper(BST* root, int value);
     void remove_helper(BST* root, int value);
     int min_helper(BST* root);
