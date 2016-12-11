@@ -420,7 +420,7 @@ bool BST::valid_helper(BST* root){
 }
 
 BST* BST::findsuccessorbelow(BST* root, int value) {
-  //finds node with value. Doesn't search upwards from root.  
+  //finds mininum in the right tree. Doesn't search upwards from root.  
   BST* current = root;
   while (current->value != value) {
     if ((value < current->value) && (current->left != NULL)) {
