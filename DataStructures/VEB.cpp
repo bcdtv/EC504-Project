@@ -111,8 +111,9 @@ void VEB::insert(unsigned int value){
 // tree is a recursive data structure. Look at
 // the helper method for implementation.
 void VEB::remove(unsigned int value){
-  if (remove_helper(this, value, 1)){
+  if (remove_helper(this, value, 1)) {
     n--;
+    cout << "in if of VEB::remove: " << n << endl;
   }
 }
 
@@ -271,6 +272,7 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
+
   // vEB tree was empty, simply set min and max values
   if (vEB->is_empty){
     vEB->min_value = value;
@@ -325,11 +327,13 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
 bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
   // make sure the summary structure is initialized
   if (vEB->summary == NULL){
+    cout << "make sure summary initialized" << endl;
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
   // removing last element from vEB tree
   if ((value == vEB->min_value) && (vEB->min_value == vEB->max_value)){
+    cout << "remov last element" << endl;
     vEB->min_count = vEB->min_count - count;
     if (vEB->min_count <= 0){
       vEB->is_empty = true;
@@ -339,6 +343,7 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 
   // special case 1
   if (value == vEB->min_value){
+    cout << "special case 1" << endl;
     if (vEB->summary->is_empty){
       vEB->min_value = vEB->max_value;
       return true;
@@ -351,6 +356,7 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 
   // special case 2
   if (value == vEB->max_value){
+    cout << "special case 2" << endl;
     if (vEB->summary->is_empty){
       vEB->max_value = vEB->min_value;
       return true;
@@ -362,6 +368,7 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 
   // special case 3
   if (vEB->summary->is_empty){
+    cout << "special case 3" << endl;
     return false;
   }
   

@@ -29,10 +29,9 @@ int main(){
   // test the vEB tree methods
   VEB vEB = test_constructor(display);
   test_insert(&vEB, numbers, display);
-  test_successor(vEB, numbers, display);
-  test_predecessor(vEB, numbers, display);
-  //test_remove(&vEB, numbers, display);
-
+  // test_successor(vEB, numbers, display);
+  // test_predecessor(vEB, numbers, display);
+  test_remove(&vEB, numbers, display);
   print_footer();
   return 0;
 }
@@ -114,13 +113,21 @@ void test_remove(VEB* vEB, vector<unsigned int> numbers, bool display){
     vEB->display();
   }
 
-  // remove and display
-  for (unsigned int i=0; i<numbers.size(); i++){
+  // remove single element and display
+  cout << "Removing: " << numbers[1] << endl;
+  vEB->remove(numbers[1]);
+  // display vEB tree
+  if (display){
+    vEB->display();
+  }  
+  
+  // remove all 
+  /*for (unsigned int i=0; i<numbers.size(); i++){
     vEB->remove(numbers[i]);
     if (display){
       vEB->display();
     }
-  }
+  }*/
 }
 
 
