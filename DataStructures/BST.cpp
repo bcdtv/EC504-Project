@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <iostream>
 #include <vector>
 #include "BST.h"
@@ -203,6 +202,12 @@ int BST::max() {
   return max_helper(this);
 }
 
+vector<unsigned int> BST::elements(){
+  vector<unsigned int> values;
+  elements_helper(this, &values);
+  return values;
+}
+
 // Display the contents of the BST. This is done 
 // in pre-order using recursion.
 void BST::display() {
@@ -370,6 +375,23 @@ int BST::max_helper(BST* root) {
   }
   // otherwise, keep traversing to the right
   return max_helper(root->right);
+}
+
+void BST::elements_helper(BST* root, vector<unsigned int>* values) {
+  // recursively insert the left tree
+  if (root->left != NULL) {
+    elements_helper(root->left, values);
+  }
+
+  // insert the root
+  for (int i = 0; i<root->count; i++) {
+    values->push_back(root->value);
+  }
+
+  // recursively insert the right tree
+  if (root->right != NULL) {
+    elements_helper(root->right, values);
+  }
 }
 
 void BST::display_helper(BST* root) {
