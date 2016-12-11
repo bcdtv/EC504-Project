@@ -12,7 +12,7 @@ public:
     int successor(int value);
     int predecessor(int value);
     void insert(int value);
-    BST* remove(int value);
+    BST& remove(int value);
     int min();
     int max();
     void display();
@@ -29,7 +29,7 @@ private:
 private:
     void copy_helper(BST* current, const BST& other);
     void insert_helper(BST* root, int value);
-    BST* remove_helper(BST* root, int value);
+    BST& remove_helper(BST* root, int value);
     int min_helper(BST* root);
     int max_helper(BST* root);
     void display_helper(BST* root);
