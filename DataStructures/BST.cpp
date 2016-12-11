@@ -419,7 +419,7 @@ bool BST::valid_helper(BST* root){
   return result_left && result_right;
 }
 
-BST* BST::findnodebelow(BST* root, int value) {
+BST* BST::findsuccessorbelow(BST* root, int value) {
   //finds node with value. Doesn't search upwards from root.  
   BST* current = root;
   while (current->value != value) {
