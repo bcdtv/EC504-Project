@@ -271,8 +271,67 @@ void BST::insert_helper(BST* root, int value){
   insert_helper(root->right, value);
 }
 
-void BST::remove_helper(BST* root , int value){
- 
+void BST::remove_helper(BST* root, int value) {
+  // find the node to be removed and its parent 
+  BST* current = root;
+  BST* parent = current;
+  while (current->value != value) {
+    if ((value < current->value) && (current->left != NULL)) {
+      parent = current;
+      current = current->left;
+      continue;
+    }
+    if ((value > current->value) && (current->right != NULL)) {
+      parent = current;
+      current = current->right;
+      continue;
+    }
+    break;
+  }
+
+  // if value isn't found, just return 
+  if (current->value != value) {
+    return;
+  }
+
+  // if multiple values exist, just decrease count by one
+  (current->count)--;
+  if (current->count >= 1) return;
+
+
+  // if node is a leaf node, delete it 
+  if ((current->left == NULL) && (current->right == NULL)) {
+    if (parent->left == current) parent->left = NULL; 
+    if (parent->right == current) parent->right = NULL; 
+    delete current;
+    return;
+  }
+
+  // if node has one child, link parent to that child and delete the current node. 
+  if (current->left == NULL) {
+    parent->right = current->right;
+    delete current;
+    return;
+  }
+
+  if (current->right == NULL) {
+    parent->left = current->left;
+    delete current;
+    return;
+  }
+
+  // if node has two children, find successor of node and recurse on that value
+  int success = current->successor(current->value);
+  BST* node2delete = findnodebelow(current, success);
+
+  // temporarily store value and count to place into current node
+  int tempval = node2delete->value;
+  int tempcount = node2delete->count;
+  node2delete->count = 1;
+  remove_helper(current, node2delete->value);
+  current->value = tempval;
+  current->count = tempcount;
+  return;
 }
 
 int BST::min_helper(BST* root){ 
@@ -339,6 +398,28 @@ bool BST::valid_helper(BST* root){
 
   // return the results
   return result_left && result_right;
+}
+
+BST* BST::findnodebelow(BST* root, int value) {
+  //finds node with value. Doesn't search upwards from root.  
+  BST* current = root;
+  while (current->value != value) {
+    if ((value < current->value) && (current->left != NULL)) {
+      current = current->left;
+      continue;
+    }
+    if ((value > current->value) && (current->right != NULL)) {
+      current = current->right;
+      continue;
+    }
+    break;
+  }
+
+  if (current->value != value) {
+    return root;
+  }
+
+  return current;
 }
 // =======================================================
 

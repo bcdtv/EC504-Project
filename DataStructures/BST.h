@@ -34,5 +34,6 @@ class BST{
     int max_helper(BST* root);
     void display_helper(BST* root);
     bool valid_helper(BST* root);
+    BST* findnodebelow(BST* root, int value);
 };
 #endif
