@@ -349,19 +349,15 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
   // removing the minimum value from a vEB
   if (value == vEB->min_value){
     cout << "removing min" << endl;
-    if (vEB->summary->is_empty){
-      cout << "min, empty summary - POP" << endl;
-      cout << "successor of " << value << " is: " << vEB->successor(value) << endl;      
-      vEB->min_value = vEB->max_value;
-      return true;
-    }
-    else{
-      // cout << "successor of " << value << " is: " << vEB->successor(value) << endl;
-      cout << "sum->min = " << vEB->summary->min_value << endl;
-      value = (vEB->clusters)[vEB->summary->min_value].min_value;
-      cout << "it's .min_value = new value:  " << value << endl;
-      vEB->min_value = value;
-    }
+    // the next value is the successor in current cluster
+    // cout << "successor of " << value << " is: " << vEB->successor(value) << endl;
+    // cout << "sum->min = " << vEB->summary->min_value << endl;
+    value = (vEB->clusters)[vEB->summary->min_value].min_value;
+    // cout << "it's .min_value = new value:  " << value << endl;
+    vEB->min_count = vEB->min_count - count;
+    // cout << vEB->min_count << endl;
+    vEB->min_value = value;
+    return true;
   }
 
   // removing the max value from a vEB
@@ -421,14 +417,14 @@ void VEB::elements_helper(VEB* vEB, unsigned int base, vector<unsigned int>* res
 
   // retrieve the keys of non empty clusters
   vector<unsigned int> keys;
-  for (it; it != end; ++it){
+  for (map<unsigned int, VEB>::iterator it = vEB->clusters.begin(); it != vEB->clusters.end(); ++it){
     keys.push_back(it->first);
   } 
 
   // sort the keys to ensure values are printed in order
   sort(keys.begin(), keys.end());
 
-  // get elements of each cluster
+  // get elements of each the clusters
   for (unsigned int i=0; i<keys.size(); i++){
     unsigned int new_base = ((vEB->clusters)[keys[i]]).u * keys[i] + base;
     elements_helper(&((vEB->clusters)[keys[i]]), new_base, result);
@@ -443,9 +439,9 @@ void VEB::display_helper(VEB* vEB, unsigned int base){
 
   // vEB is guaranteed to not be empty
   for (unsigned int i=0; i<vEB->min_count; i++){
-    cout << endl;
+    // cout << endl;
     cout << base + vEB->min_value << " ";
-    cout << vEB->min_count << endl;
+    // cout << vEB->min_count << endl;
   }
 
   // get the iterators for the clusters map
@@ -454,7 +450,7 @@ void VEB::display_helper(VEB* vEB, unsigned int base){
 
   // retrieve the keys of non empty clusters
   vector<unsigned int> keys;
-  for (it; it != end; ++it){
+  for (map<unsigned int, VEB>::iterator it = vEB->clusters.begin(); it != vEB->clusters.end(); ++it){
     keys.push_back(it->first);
   } 
 
