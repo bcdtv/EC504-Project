@@ -22,7 +22,7 @@ vector<unsigned int> sort(BinaryHeap* heap){
 }
 
 vector<unsigned int> sort(BST* bst){
-  return vector<unsigned int>();
+  return bst->elements();
 }
 
 // Because a deque does not contain a 
