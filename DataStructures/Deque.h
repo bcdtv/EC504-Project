@@ -22,6 +22,7 @@ class Deque{
     int pop_back();
     int extract_min();
     bool empty();
+    int size();
     vector<int> elements();
     void display();
 

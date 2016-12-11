@@ -126,6 +126,11 @@ bool Deque::empty(){
   return nodes->size() == 0;
 }
 
+// get the number of elements in the deque
+int Deque::size(){
+  return nodes->size();
+}
+
 // get all the nodes in a vector
 vector<int> Deque::elements(){
   vector<int> result;

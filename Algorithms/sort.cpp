@@ -25,8 +25,18 @@ vector<unsigned int> sort(BST* bst){
   return vector<unsigned int>();
 }
 
+// Because a deque does not contain a 
+// natural way to retreive a sorted list,
+// an extract min method was implemented
+// to make it simpler code-wise.
 vector<unsigned int> sort(Deque* deque){
-  return vector<unsigned int>();
+  unsigned int i = 0;
+  vector<unsigned int> result(deque->size());
+  while(!(deque->empty())){
+    result[i] = deque->extract_min();
+    i++;
+  }
+  return result;
 }
 
 // To return a sorted list of numbers

@@ -217,6 +217,9 @@ int extract_min();
 // get if the deque is empty
 bool empty();
 
+// returns the number of elements in the deque
+int size();
+
 // get all the elements stored in the deque
 vector<int> elements();
 
