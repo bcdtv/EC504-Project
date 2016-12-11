@@ -32,14 +32,6 @@ command: make test-heap
  - each method is tested seperately
  - prints results to stdout
 
-**VEB Tree**  
-command: make test-veb  
- - asks for display option, set display off for large values of N
- - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
- - tests vEB tree methods for correctness
- - each method is tested seperately
- - prints results to stdout
-
 **Binary Search Tree**  
 command: make test-bst  
  - asks for display option, set display off for large values of N
@@ -53,6 +45,14 @@ command: make test-deque
  - asks for display option, set display off for large values of N
  - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
  - tests deque methods for correctness
+ - each method is tested seperately
+ - prints results to stdout
+
+**VEB Tree**  
+command: make test-veb  
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
+ - tests vEB tree methods for correctness
  - each method is tested seperately
  - prints results to stdout
 
@@ -96,51 +96,6 @@ void display();
 
 // checks if the heap maintains the min heap property
 bool valid();
-```
-
-### vEB Tree
-```c++
-// construct an empty vEB tree
-VEB();
-
-// create a new vEB tree by copying another
-VEB(const VEB& other);
-
-// destroy a vEB tree
-~VEB();
-
-// replace a vEB tree with the values of another
-VEB& operator=(const VEB& other);
-
-// get the next number greater than value
-unsigned int successor(unsigned int value);
-
-// get the next number less than value
-unsigned int predecessor(unsigned int value);
-
-// insert a number
-void insert(unsigned int value);
-
-// remove a number
-void remove(unsigned int value);
-
-// get the min value within the vEB tree
-unsigned int min();
-
-// get the max value within the vEB tree
-unsigned int max();
-
-// returns true if the vEB tree is empty
-bool empty();
-
-// the number of elements stored in the vEB tree
-unsigned int size();
-
-// retrieve the elements stored in the vEB tree
-vector<unsigned int> elements();
-
-// prints the vEB tree values to stdout
-void display();
 ```
 
 ### Binary Search Tree
@@ -226,6 +181,52 @@ vector<int> elements();
 // print the values within the deque to stdout
 void display();
 ```
+
+### vEB Tree
+```c++
+// construct an empty vEB tree
+VEB();
+
+// create a new vEB tree by copying another
+VEB(const VEB& other);
+
+// destroy a vEB tree
+~VEB();
+
+// replace a vEB tree with the values of another
+VEB& operator=(const VEB& other);
+
+// get the next number greater than value
+unsigned int successor(unsigned int value);
+
+// get the next number less than value
+unsigned int predecessor(unsigned int value);
+
+// insert a number
+void insert(unsigned int value);
+
+// remove a number
+void remove(unsigned int value);
+
+// get the min value within the vEB tree
+unsigned int min();
+
+// get the max value within the vEB tree
+unsigned int max();
+
+// returns true if the vEB tree is empty
+bool empty();
+
+// the number of elements stored in the vEB tree
+unsigned int size();
+
+// retrieve the elements stored in the vEB tree
+vector<unsigned int> elements();
+
+// prints the vEB tree values to stdout
+void display();
+```
+
 ---
 
 
