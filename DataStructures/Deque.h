@@ -1,7 +1,7 @@
 #ifndef DEQUE_H
 #define DEQUE_H
 
-#include <deque>
+#include <list>
 #include <vector>
 
 using namespace std;
@@ -11,9 +11,6 @@ class Deque{
   public:
     Deque();
     Deque(vector<unsigned int> numbers);
-    Deque(const Deque& other);
-    ~Deque();
-    Deque& operator=(const Deque& other);
     int successor(int value);
     int predecessor(int value);
     void push_front(int value);
@@ -28,6 +25,6 @@ class Deque{
 
   // private fields
   private:
-    deque<int>* nodes;
+    list<int> nodes;
 };
 #endif
