@@ -241,6 +241,7 @@ void BST::copy_helper(BST* current, const BST& other){
     copy_helper(current->right, tmp);
   }
 }
+
 void BST::insert_helper(BST* root, int value){   
   // value is equal to root value, increment count
   if (value == root->value){
