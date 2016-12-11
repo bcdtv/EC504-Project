@@ -59,9 +59,10 @@ command: make test-deque
 **Sorting Benchmarks**  
 command: make test-sort  
  - asks for display option, set display off for large values of N
+ - asks for data structures to be tested
  - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
- - times how long it takes to store the random numbers in each data structure
- - times how long it takes to return a sorted array from each data structure
+ - times how long it takes to store the random numbers in each requested data structure
+ - times how long it takes to return a sorted array from each requested data structure
  - prints results to stdout
 
 ---
