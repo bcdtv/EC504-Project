@@ -334,6 +334,7 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
+<<<<<<< HEAD
   // removing last (ONLY) element from vEB tree
   if ((value == vEB->min_value) && (vEB->min_value == vEB->max_value)){
     cout << "remove last (only) element - POP" << endl;
@@ -380,9 +381,47 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
   // special case 3
   if (vEB->summary->is_empty){
     cout << "special case 3 -- POP" << endl;
+=======
+  // handle empty vEB tree
+  if (vEB->is_empty){
     return false;
   }
-  
+
+  // removing the last element
+  if ((value == vEB->min_value) && (vEB->min_value == vEB->max_value)){
+    vEB->is_empty = true;
+    return true;
+  }
+
+  // vEB holds two values, removing min so replace min with max
+  if (value == vEB->min_value && vEB->summary->is_empty){
+      vEB->min_value = vEB->max_value;
+      return true;
+  }
+
+  // replace min with next smallest value, remove next smallest value
+  if (value == vEB->min_value){
+    value = (vEB->clusters)[vEB->summary->min_value].min_value;
+    vEB->min_value = value;
+  }
+
+  // vEB holds two values, removing max so replace max with min
+  if (value == vEB->max_value && vEB->summary->is_empty){
+    vEB->max_value = vEB->min_value;
+    return true;
+  }
+
+  // replace max with next largest value
+  if (value == vEB->max_value){
+    vEB->max_value = (vEB->clusters)[vEB->summary->max_value].max_value;
+  }
+
+  // if value is not min or max and summary is empty, value is not in vEB
+  if (summary->is_empty){
+>>>>>>> master
+    return false;
+  }
+
   // calculate cluster this value belongs to
   unsigned int cluster_i =  value / ((unsigned int) sqrt(vEB->u));
 
@@ -395,9 +434,13 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 
   // if cluster is now empty, update summary structure
   if ((vEB->clusters)[cluster_i].is_empty){
+<<<<<<< HEAD
     cout << "updating summary structure for cluster_i = " << cluster_i;
     cout << "  position = " << position << endl;
     remove_helper(vEB->summary, cluster_i, count);
+=======
+    remove_helper(vEB->summary, cluster_i, 1);
+>>>>>>> master
   }
   
   cout << "all the way at the bottom - POP" << endl;

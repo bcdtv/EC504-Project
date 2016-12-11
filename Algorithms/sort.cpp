@@ -2,6 +2,8 @@
 #include <vector>
 #include "sort.h"
 #include "../DataStructures/BinaryHeap.h"
+#include "../DataStructures/BST.h"
+#include "../DataStructures/Deque.h"
 #include "../DataStructures/VEB.h"
 
 using namespace std;
@@ -14,6 +16,24 @@ vector<unsigned int> sort(BinaryHeap* heap){
   vector<unsigned int> result(heap->size());
   while(!(heap->empty())){
     result[i] = heap->extract_min();
+    i++;
+  }
+  return result;
+}
+
+vector<unsigned int> sort(BST* bst){
+  return vector<unsigned int>();
+}
+
+// Because a deque does not contain a 
+// natural way to retreive a sorted list,
+// an extract min method was implemented
+// to make it simpler code-wise.
+vector<unsigned int> sort(Deque* deque){
+  unsigned int i = 0;
+  vector<unsigned int> result(deque->size());
+  while(!(deque->empty())){
+    result[i] = deque->extract_min();
     i++;
   }
   return result;

@@ -32,6 +32,22 @@ command: make test-heap
  - each method is tested seperately
  - prints results to stdout
 
+**Binary Search Tree**  
+command: make test-bst  
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
+ - tests binary search tree methods for correctness
+ - each method is tested seperately
+ - prints results to stdout
+
+**Deque**  
+command: make test-deque  
+ - asks for display option, set display off for large values of N
+ - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
+ - tests deque methods for correctness
+ - each method is tested seperately
+ - prints results to stdout
+
 **VEB Tree**  
 command: make test-veb  
  - asks for display option, set display off for large values of N
@@ -43,9 +59,10 @@ command: make test-veb
 **Sorting Benchmarks**  
 command: make test-sort  
  - asks for display option, set display off for large values of N
+ - asks for data structures to be tested
  - asks for inputs N, MIN_INT, and MAX_INT to generate array of random numbers
- - times how long it takes to store the random numbers in each data structure
- - times how long it takes to return a sorted array from each data structure
+ - times how long it takes to store the random numbers in each requested data structure
+ - times how long it takes to return a sorted array from each requested data structure
  - prints results to stdout
 
 ---
@@ -79,6 +96,99 @@ void display();
 
 // checks if the heap maintains the min heap property
 bool valid();
+```
+
+### Binary Search Tree
+```c++
+// create a binary search tree with default value 0
+BST()
+
+// create a binary search tree with given value
+BST(int value);
+
+// copy constructor for deep copying another BST
+BST(const BST& other);
+
+// destructor for cleaning up dynamic memory
+~BST();
+
+// copy assignment operator for deep copying another BST
+BST& operator=(const BST& other);
+
+// get the next number greater than value
+int successor(int value);
+
+// get the next number less than value
+int predecessor(int value);
+
+// insert a number
+void insert(int value); 
+
+// remove a number
+void remove(int value);
+
+// get the minimum element within the tree
+int min();
+
+// get the maximum element within the tree
+int max();
+
+// print the tree elements to stdout
+void display();
+
+// checks if the tree is a proper binary search tree
+bool valid();
+```
+
+### Deque
+```c++
+// create an empty deque
+Deque();
+
+// construct a deque from an input vector
+Deque(vector<unsigned int> numbers);
+
+// copy constructor
+Deque(const Deque& other);
+
+// destructor
+~Deque();
+
+// copy assignment operator
+Deque& operator=(const Deque& other);
+
+// get the next number greater than value (does not pop)
+int successor(int value);
+
+// get the next number less than value (does not pop)
+int predecessor(int value);
+
+// push a number onto the front
+void push_front(int value);
+
+// push a number onto the back
+void push_back(int value);
+
+// pop a number from the front
+int pop_front();
+
+// pop a number from the back
+int pop_back();
+
+// extract the minimum element
+int extract_min();
+
+// get if the deque is empty
+bool empty();
+
+// returns the number of elements in the deque
+int size();
+
+// get all the elements stored in the deque
+vector<int> elements();
+
+// print the values within the deque to stdout
+void display();
 ```
 
 ### vEB Tree
@@ -126,71 +236,6 @@ vector<unsigned int> elements();
 void display();
 ```
 
-### Binary Search Tree
-```c++
-// create an empty Binary Search Tree
-BST::BST()
-
-// construct a BST from an input vector
-BST::BST(std::vector<int> numbers)
-
-// insert a number
-void BST::insert(int value)
-
-// remove a number
-void BST::remove(int value)
-
-// extract the minimum element
-int BST::extractMin()
-
-// get if the BST is empty
-bool BST::isEmpty()
-
-// get the next number greater than value
-int BST::successor(int value)
-
-// get the next number less than value
-int BST::predecessor(int value)
-
-// get all the nodes in a vector
-std::vector<int> BST::getNodes()
-
-// destructor
-BST::~BST()
-```
-
-### Deque
-```c++
-// create an empty deque
-Deque::Deque()
-
-// construct a Deque from an input vector
-Deque::Deque(std::vector<int> numbers)
-
-// insert a number
-void Deque::insert(int value)
-
-// remove a number
-void Deque::remove(int value)
-
-// extract the minimum element
-int Deque::extractMin()
-
-// get if the Deque is empty
-bool Deque::isEmpty()
-
-// get the next number greater than value
-int Deque::successor(int value)
-
-// get the next number less than value
-int Deque::predecessor(int value)
-
-// get all the nodes in a vector
-std::vector<int> Deque::getNodes()
-
-// destructor
-Deque::~Deque()
-```
 ---
 
 
