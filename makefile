@@ -1,7 +1,7 @@
 test-sort:	Algorithms/sort.cpp DataStructures/BinaryHeap.cpp DataStructures/VEB.cpp \
 		DataStructures/BST.cpp DataStructures/Deque.cpp Tests/test-sort.cpp
 		mkdir -p Tests/results
-		g++ -o test-sort Algorithms/sort.cpp DataStructures/BinaryHeap.cpp DataStructures/VEB.cpp \
+		g++ -std=c++0x -o test-sort Algorithms/sort.cpp DataStructures/BinaryHeap.cpp DataStructures/VEB.cpp \
 		DataStructures/BST.cpp DataStructures/Deque.cpp Tests/test-sort.cpp
 
 test-heap:	DataStructures/BinaryHeap.cpp Tests/test-heap.cpp
