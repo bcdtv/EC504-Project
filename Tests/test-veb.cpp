@@ -20,11 +20,25 @@ int main(){
   cin >> display;
 
   // generate a sample vector of numbers for testing
-  vector<unsigned int> numbers = generate_numbers(display);
+
+  // removes correctly
+  // static const int arr[] = {32,35,44,49,73,74,76,84,91};
+  // static const int arr[] = {5,18,29,38,44,49,55,70,85};
+  // end
+  // removes correctly BUT inserts a number
+  static const int arr[] = {2,31,90,64,64,72,79,54,86};
+  // static const int arr[] = {7,7,9,22,32,45,66,80,85};
+  // end
+  // infinite loop
+  // static const int arr[] = {68, 47, 29, 60, 26, 51, 22, 47, 89};
+  // end
+  vector<unsigned int> numbers (arr, arr + sizeof(arr) / sizeof(arr[0]) );
+
+  /*vector<unsigned int> numbers = generate_numbers(display);
   if (numbers.empty()){
     print_footer();
     return 0;
-  }
+  }*/
 
   // test the vEB tree methods
   VEB vEB = test_constructor(display);
@@ -123,6 +137,7 @@ void test_remove(VEB* vEB, vector<unsigned int> numbers, bool display){
   
   // remove all 
   /*for (unsigned int i=0; i<numbers.size(); i++){
+    cout << "Removing: " << numbers[i] << endl;
     vEB->remove(numbers[i]);
     if (display){
       vEB->display();
