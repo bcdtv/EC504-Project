@@ -148,19 +148,10 @@ Deque();
 // construct a deque from an input vector
 Deque(vector<unsigned int> numbers);
 
-// copy constructor
-Deque(const Deque& other);
-
-// destructor
-~Deque();
-
-// copy assignment operator
-Deque& operator=(const Deque& other);
-
-// get the next number greater than value (does not pop)
+// get the next number greater than value
 int successor(int value);
 
-// get the next number less than value (does not pop)
+// get the next number less than value
 int predecessor(int value);
 
 // push a number onto the front
