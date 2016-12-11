@@ -19,7 +19,7 @@ class BST{
     bool valid();
 
   // private fields
-  public:
+  private:
     int value;
     int count;
     BST* left;
