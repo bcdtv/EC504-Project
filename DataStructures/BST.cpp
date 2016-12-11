@@ -184,8 +184,8 @@ void BST::insert(int value){
 // Remove a value into the BST. This 
 // is done using recursion because the
 // BST is a recursive data structure.
-void BST::remove(int value){
-  remove_helper(this, value);
+BST* BST::remove(int value) {
+  return remove_helper(this, value);
 }
 
 // Retrieve the minimum value in the BST. 
@@ -215,6 +215,8 @@ void BST::display(){
 bool BST::valid(){
   return valid_helper(this);
 }
+
+
 // =======================================================
 
 // ============ Private Method Implementations ===========
@@ -271,7 +273,7 @@ void BST::insert_helper(BST* root, int value){
   insert_helper(root->right, value);
 }
 
-void BST::remove_helper(BST* root, int value) {
+BST* BST::remove_helper(BST* root, int value) {
   // find the node to be removed and its parent 
   BST* current = root;
   BST* parent = current;
@@ -291,38 +293,55 @@ void BST::remove_helper(BST* root, int value) {
 
   // if value isn't found, just return 
   if (current->value != value) {
-    return;
+    return root;
   }
 
   // if multiple values exist, just decrease count by one
   (current->count)--;
-  if (current->count >= 1) return;
-
+  if (current->count >= 1) return root;
+  
+  bool rightempty = current->left == NULL;
+  bool leftempty = current->right == NULL; 
+  bool nochild = (leftempty) && (rightempty);
+  bool onechild = (leftempty) || (rightempty);
 
   // if node is a leaf node, delete it 
-  if ((current->left == NULL) && (current->right == NULL)) {
-    if (parent->left == current) parent->left = NULL; 
-    if (parent->right == current) parent->right = NULL; 
+  if (nochild) {
+    if (parent == current) {
+      current->value = 0; 
+      return root; 
+    }
+    if (parent->left == current) parent->left = NULL;
+    if (parent->right == current) parent->right = NULL;
     delete current;
-    return;
+    return root;
   }
 
   // if node has one child, link parent to that child and delete the current node. 
-  if (current->left == NULL) {
+  if (leftempty) {
+    if (parent == current) {
+      BST* newroot = current->right;
+      delete current; 
+      return newroot; 
+    }
     parent->right = current->right;
     delete current;
-    return;
+    return root;
   }
 
-  if (current->right == NULL) {
+  if (rightempty) {
+    if (parent == current) {
+      BST* newroot = current->left; 
+      delete current; 
+      return newroot; 
+    }
     parent->left = current->left;
     delete current;
-    return;
+    return root;
   }
 
-  // if node has two children, find successor of node and recurse on that value
-  int success = current->successor(current->value);
-  BST* node2delete = findnodebelow(current, success);
+  // if node has two children, find minimum of current node's right and recurse on that value
+  BST* node2delete = findsuccessorbelow(current);
 
   // temporarily store value and count to place into current node
   int tempval = node2delete->value;
@@ -331,7 +350,7 @@ void BST::remove_helper(BST* root, int value) {
   remove_helper(current, node2delete->value);
   current->value = tempval;
   current->count = tempcount;
-  return;
+  return root;
 }
 
 int BST::min_helper(BST* root){ 
