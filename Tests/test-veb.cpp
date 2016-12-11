@@ -23,10 +23,10 @@ int main(){
   // generate a sample vector of numbers for testing
 
   // removes correctly
-  // static const int arr[] = {32,35,44,49,73,74,76,84,91};
-  // static const int arr[] = {5,18,29,38,44,49,55,70,85};
   // end
   // removes correctly BUT inserts a number
+  // static const int arr[] = {5,18,29,38,44,49,55,70,85};
+  // static const int arr[] = {32,35,44,49,73,74,76,84,91};
   static const int arr[] = {2,31,90,64,64,72,79,54,86};
   // static const int arr[] = {7,7,9,22,32,45,66,80,85};
   // end
@@ -44,9 +44,10 @@ int main(){
   // test the vEB tree methods
   VEB vEB = test_constructor(display);
   test_insert(&vEB, numbers, display);
-  // test_successor(vEB, numbers, display);
-  // test_predecessor(vEB, numbers, display);
   test_remove(&vEB, numbers, display);
+  cout << "done" << endl;
+  test_successor(vEB, numbers, display);
+  test_predecessor(vEB, numbers, display);
   print_footer();
   return 0;
 }
@@ -131,6 +132,9 @@ void test_remove(VEB* vEB, vector<unsigned int> numbers, bool display){
   // remove single element and display
   cout << "Removing: " << numbers[1] << endl;
   vEB->remove(numbers[1]);
+  cout << "Removing: " << numbers[5] << endl;
+  vEB->remove(numbers[5]);
+  // vEB->remove(numbers[9]);
   // display vEB tree
   if (display){
     vEB->display();
