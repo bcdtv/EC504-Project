@@ -45,7 +45,6 @@ int main(){
   VEB vEB = test_constructor(display);
   test_insert(&vEB, numbers, display);
   test_remove(&vEB, numbers, display);
-  cout << "done" << endl;
   test_successor(vEB, numbers, display);
   test_predecessor(vEB, numbers, display);
   print_footer();

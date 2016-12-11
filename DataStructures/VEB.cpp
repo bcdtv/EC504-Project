@@ -171,7 +171,6 @@ VEB::VEB(unsigned int u){
 
 unsigned int VEB::successor_helper(VEB* vEB, unsigned int value){
   // make sure the summary structure is initialized
-  cout << "going in" << endl;
   if (vEB->summary == NULL){
     vEB->summary = new VEB(sqrt(vEB->u));
   }
@@ -358,6 +357,7 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
     vEB->min_count = vEB->min_count - count;
     // cout << vEB->min_count << endl;
     vEB->min_value = value;
+    return true;
   }
 
   // removing the max value from a vEB
