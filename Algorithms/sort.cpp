@@ -2,6 +2,8 @@
 #include <vector>
 #include "sort.h"
 #include "../DataStructures/BinaryHeap.h"
+#include "../DataStructures/BST.h"
+#include "../DataStructures/Deque.h"
 #include "../DataStructures/VEB.h"
 
 using namespace std;
@@ -17,6 +19,14 @@ vector<unsigned int> sort(BinaryHeap* heap){
     i++;
   }
   return result;
+}
+
+vector<unsigned int> sort(BST* bst){
+  return vector<unsigned int>();
+}
+
+vector<unsigned int> sort(Deque* deque){
+  return vector<unsigned int>();
 }
 
 // To return a sorted list of numbers
