@@ -138,6 +138,9 @@ int min();
 // get the maximum element within the tree
 int max();
 
+// retreive the values stored in the BST in sorted order
+vector<unsigned int> elements();
+
 // print the tree elements to stdout
 void display();
 
