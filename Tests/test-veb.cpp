@@ -18,7 +18,6 @@ int main(){
   bool display;
   cout << "display? (0/1): ";
   cin >> display;
-  display = true;
 
   // generate a sample vector of numbers for testing
   vector<unsigned int> numbers = generate_numbers(display);
