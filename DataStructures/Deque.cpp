@@ -10,7 +10,6 @@ using namespace std;
 // Default constructor for creating an
 // empty deque.
 Deque::Deque(){
-
 }
 
 // Construct a deque from an input vector.
@@ -92,8 +91,7 @@ int Deque::extract_min(){
   int min_index = 0;
   int i = 0;
   for(list<int>::iterator it = nodes.begin(); it != nodes.end(); it++){
-    if(*it < min)
-    {
+    if(*it < min){
       min = *it;
       min_index = i;
     }
