@@ -337,12 +337,24 @@ BST* BST::remove_helper(BST* root, int value) {
       BST* newroot = current->right;
       return newroot;
     }
-    parent->right = current->right;
+    if (parent->left == current) parent->left = current->right; 
+    if (parent->right == current) parent->right = current->right; 
     current->right = NULL;
     current->left = NULL;
     delete current;
-    BST* coolnode = parent->right->right; 
-    BST* coolnode2 = parent->right; 
+    return root;
+  }
+
+  if (rightempty) {
+    if (parent == current) {
+      BST* newroot = current->left;
+      return newroot;
+    }
+    if (parent->left == current) parent->left = current->left; 
+    if (parent->right == current) parent->right = current->left;
+    current->right = NULL;
+    current->left = NULL;
+    delete current;
     return root;
   }
 
