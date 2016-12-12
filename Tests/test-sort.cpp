@@ -104,7 +104,7 @@ int main(){
   // benchmark sorting with the vEB
   if (test_vEB){
     t_start = high_resolution_clock::now();
-    sorted_numbers = sort(vEB);
+    sorted_numbers = sort(&vEB);
     t_stop = high_resolution_clock::now();
     elapsed_time = duration_cast<microseconds>(t_stop - t_start).count();
     cout << "Sorting time with the vEB tree: " << elapsed_time << PR_STR << endl;
@@ -122,7 +122,7 @@ int main(){
   // benchmark sorting with the binary heap
   if (test_heap){
     t_start = high_resolution_clock::now();
-    sorted_numbers = sort(heap);
+    sorted_numbers = sort(&heap);
     t_stop = high_resolution_clock::now();
     elapsed_time = duration_cast<microseconds>(t_stop - t_start).count();
     cout << "Sorting time with the binary heap: " << elapsed_time << PR_STR << endl;
@@ -140,7 +140,7 @@ int main(){
   // benchmark sorting with the binary search tree
   if (test_bst){
     t_start = high_resolution_clock::now();
-    sorted_numbers = sort(bst);
+    sorted_numbers = sort(&bst);
     t_stop = high_resolution_clock::now();
     elapsed_time = duration_cast<microseconds>(t_stop - t_start).count();
     cout << "Sorting time with the binary search tree: " << elapsed_time << PR_STR << endl;
@@ -158,7 +158,7 @@ int main(){
   // benchmark sorting with the deque ****THIS IS IN BIGGER UNITS BECAUSE IT'S SLOW*****
   if (test_deque){
     t_start = high_resolution_clock::now();
-    sorted_numbers = sort(deque);
+    sorted_numbers = sort(&deque);
     t_stop = high_resolution_clock::now();
     elapsed_time = duration_cast<milliseconds>(t_stop - t_start).count();
     cout << "Sorting time with the deque: " << elapsed_time << "ms" << endl;

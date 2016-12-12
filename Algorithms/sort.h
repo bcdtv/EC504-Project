@@ -9,9 +9,9 @@
 
 using namespace std;
 
-vector<unsigned int> sort(BinaryHeap heap);
-vector<unsigned int> sort(BST bst);
-vector<unsigned int> sort(Deque deque);
-vector<unsigned int> sort(VEB vEB);
+vector<unsigned int> sort(BinaryHeap* heap);
+vector<unsigned int> sort(BST* bst);
+vector<unsigned int> sort(Deque* deque);
+vector<unsigned int> sort(VEB* vEB);
 
 #endif
