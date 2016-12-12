@@ -24,6 +24,11 @@ _reasoning:_ Simply preference. Most, if not all, have been changed to this styl
 ---
 
 ## Running Tests
+**All**
+command: make run-all
+ - makes all test binaries
+ - runs all test binaries in order below
+
 **Binary Heap**  
 command: make test-heap  
  - asks for display option, set display off for large values of N
