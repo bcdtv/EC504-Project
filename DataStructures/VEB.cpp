@@ -111,9 +111,9 @@ void VEB::insert(unsigned int value){
 // tree is a recursive data structure. Look at
 // the helper method for implementation.
 void VEB::remove(unsigned int value){
+  // only decrement n if a value was actually removed
   if (remove_helper(this, value, 1)) {
     n--;
-    cout << "new length of VEB after remove: " << n << endl;
   }
 }
 
@@ -272,7 +272,6 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
-
   // vEB tree was empty, simply set min and max values
   if (vEB->is_empty){
     vEB->min_value = value;
@@ -325,21 +324,14 @@ void VEB::insert_helper(VEB* vEB, unsigned int value, unsigned int count){
 }
 
 bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
-  cout << "entering remove_helper for value " << value << endl;
-  cout << "min value is: " << vEB->min_value;
-  cout << " max value is: " << vEB->max_value << endl;
   // make sure the summary structure is initialized
   if (vEB->summary == NULL){
-    cout << "null summary" << endl;
     vEB->summary = new VEB(sqrt(vEB->u));
   }
 
   // removing last (ONLY) element from vEB tree
   if ((value == vEB->min_value) && (vEB->min_value == vEB->max_value)){
-    cout << "remove last (only) element - POP" << endl;
-    cout << "BEFORE min_count: " << vEB->min_count << endl;
     vEB->min_count = vEB->min_count - count;
-    cout << "AFTER min_count: " << vEB->min_count << endl;
     if (vEB->min_count <= 0){
       vEB->is_empty = true;
     }
@@ -348,23 +340,16 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 
   // removing the minimum value from a vEB
   if (value == vEB->min_value){
-    cout << "removing min" << endl;
     // the next value is the successor in current cluster
-    // cout << "successor of " << value << " is: " << vEB->successor(value) << endl;
-    // cout << "sum->min = " << vEB->summary->min_value << endl;
     value = (vEB->clusters)[vEB->summary->min_value].min_value;
-    // cout << "it's .min_value = new value:  " << value << endl;
     vEB->min_count = vEB->min_count - count;
-    // cout << vEB->min_count << endl;
     vEB->min_value = value;
     return true;
   }
 
   // removing the max value from a vEB
   if (value == vEB->max_value){
-    cout << "if == max_value" << endl;
     if (vEB->summary->is_empty){
-      cout << "max, empty summary - POP" << endl;
       vEB->max_value = vEB->min_value;
       return true;
     }
@@ -375,7 +360,6 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
 
   // special case 3
   if (vEB->summary->is_empty){
-    cout << "special case 3 -- POP" << endl;
     return false;
   }
 
@@ -385,18 +369,14 @@ bool VEB::remove_helper(VEB* vEB, unsigned int value, unsigned int count){
   // calculate position within cluster
   unsigned int position = value % ((unsigned int) sqrt(vEB->u));
 
-  cout << "recursion: cluster_i = " << cluster_i << "; position = " << position << " sqrt = " << ((unsigned int) sqrt(vEB->u)) << endl; 
   // remove value from this cluster
   remove_helper(&((vEB->clusters)[cluster_i]), position, count);
 
   // if cluster is now empty, update summary structure
   if ((vEB->clusters)[cluster_i].is_empty){
-    cout << "updating summary structure for cluster_i = " << cluster_i;
-    cout << "  position = " << position << endl;
     remove_helper(vEB->summary, cluster_i, count);
   }
   
-  cout << "all the way at the bottom - POP" << endl;
   return true;
 }
 
@@ -439,9 +419,7 @@ void VEB::display_helper(VEB* vEB, unsigned int base){
 
   // vEB is guaranteed to not be empty
   for (unsigned int i=0; i<vEB->min_count; i++){
-    // cout << endl;
     cout << base + vEB->min_value << " ";
-    // cout << vEB->min_count << endl;
   }
 
   // get the iterators for the clusters map
