@@ -88,8 +88,7 @@ int Deque::pop_back(){
 // Extract the minimum element from the deque.
 int Deque::extract_min(){
   int min = INT_MAX;
-  int min_index = 0;
-  int i = 0;
+  int min_index = 0, i = 0;
   for(list<int>::iterator it = nodes.begin(); it != nodes.end(); it++){
     if(*it < min){
       min = *it;
@@ -98,7 +97,7 @@ int Deque::extract_min(){
     i++;
   }
   list<int>::iterator position = nodes.begin();
-  advance(position, i - 1);
+  advance(position, min_index);
   nodes.erase(position);
   return min;
 }
