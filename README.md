@@ -24,8 +24,8 @@ _reasoning:_ Simply preference. Most, if not all, have been changed to this styl
 ---
 
 ## Running Tests
-**All**
-command: make run-all
+**All**  
+command: make run-all  
  - makes all test binaries
  - runs all test binaries in order below
 
