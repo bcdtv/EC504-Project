@@ -402,7 +402,7 @@ void VEB::elements_helper(VEB* vEB, unsigned int base, vector<unsigned int>* res
   } 
 
   // sort the keys to ensure values are printed in order
-  sort(keys.begin(), keys.end());
+  //sort(keys.begin(), keys.end());
 
   // get elements of each the clusters
   for (unsigned int i=0; i<keys.size(); i++){
