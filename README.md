@@ -205,9 +205,6 @@ unsigned int predecessor(unsigned int value);
 // insert a number
 void insert(unsigned int value);
 
-// remove a number
-void remove(unsigned int value);
-
 // get the min value within the vEB tree
 unsigned int min();
 
